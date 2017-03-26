@@ -29,6 +29,12 @@ namespace AmiiboSN_Changer
                 return;
             }
 
+            if (Environment.CurrentDirectory != AppDomain.CurrentDomain.BaseDirectory)
+            {
+                Console.WriteLine("Changed Working Directory to the directory of asnc.exe");
+                Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            }
+
             var amount = 1;
             if (args.Length == 2)
             {
