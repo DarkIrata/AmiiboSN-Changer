@@ -15,7 +15,6 @@ namespace AmiiboSN_Changer
 
         static void Main(string[] args)
         {
-
             if (args.Length == 0)
             {
                 Console.WriteLine("Use asnc.exe \"FILE\" AMOUNT");
@@ -56,9 +55,9 @@ namespace AmiiboSN_Changer
 
             Console.WriteLine("This tool is a C# copy of AnalogMan's Python script. Props to him");
             Console.WriteLine("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+            var fileDecrypted = DecrytAmiibo(fileOrg);
             for (int nr = 0; nr < amount; nr++)
             {
-                var fileDecrypted = DecrytAmiibo(fileOrg);
 
                 var serialParts = GenerateSerial();
                 var chk1 = serialParts[0] ^ serialParts[1] ^ serialParts[2];
@@ -71,14 +70,12 @@ namespace AmiiboSN_Changer
                 }
                 else
                 {
-                    EncryptAmiibo(fileDecrypted, $"New_{Path.GetFileNameWithoutExtension(fileOrg)}_{nr+1}.bin");
+                    EncryptAmiibo(fileDecrypted, $"{Path.GetFileNameWithoutExtension(fileOrg)}_ASNC-{nr+1}.bin");
                 }
-
-                Console.WriteLine("Cleaning up");
-                File.Delete(fileDecrypted);
-                Console.WriteLine();
                 Console.WriteLine();
             }
+            Console.WriteLine("Cleaning up");
+            File.Delete(fileDecrypted);
             Console.WriteLine("Done");
         }
 
