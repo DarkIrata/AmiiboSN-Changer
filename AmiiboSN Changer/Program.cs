@@ -35,10 +35,16 @@ namespace AmiiboSN_Changer
             }
 
             var amount = 1;
-            if (args.Length == 2)
+            if (args.Length >= 2)
             {
                 var amountStr = args[1];
                 int.TryParse(amountStr, out amount);
+            }
+
+            var output = string.Empty;
+            if (args.Length >= 3)
+            {
+                output = args[2];
             }
 
             if (!File.Exists(amiitool))
@@ -58,7 +64,6 @@ namespace AmiiboSN_Changer
             var fileDecrypted = DecrytAmiibo(fileOrg);
             for (int nr = 0; nr < amount; nr++)
             {
-
                 var serialParts = GenerateSerial();
                 var chk1 = serialParts[0] ^ serialParts[1] ^ serialParts[2];
                 var chk2 = serialParts[3] ^ serialParts[4] ^ serialParts[5] ^ serialParts[6];
@@ -70,9 +75,8 @@ namespace AmiiboSN_Changer
                 }
                 else
                 {
-                    EncryptAmiibo(fileDecrypted, $"{Path.GetFileNameWithoutExtension(fileOrg)}_ASNC-{nr+1}.bin");
+                    EncryptAmiibo(fileDecrypted, $"{Path.GetFileNameWithoutExtension(fileOrg)}_ASNC-{nr + 1}.bin", output);
                 }
-                Console.WriteLine();
             }
             Console.WriteLine("Cleaning up");
             File.Delete(fileDecrypted);
@@ -126,25 +130,32 @@ namespace AmiiboSN_Changer
 
             if (File.Exists(fileDecrypted))
             {
-                Console.WriteLine("Found old decrypted file.");
-                Console.WriteLine("Press ENTER to delete it or close this tool now.");
-                Console.ReadLine();
-
+                Console.WriteLine("Found old decrypted file. AAaaaand it's gone");
                 File.Delete(fileDecrypted);
             }
 
-            CasllAmiitool($"-d -k {retailKey} -i \"{orgFilePath}\" -o \"{fileDecrypted}\"");
+            CallAmiitool($"-d -k {retailKey} -i \"{orgFilePath}\" -o \"{fileDecrypted}\"");
 
             return fileDecrypted;
         }
 
-        private static void EncryptAmiibo(string name, string saveName)
+        private static void EncryptAmiibo(string name, string saveName, string savePath)
         {
             Console.WriteLine($"Encrypting '{name}' as '{saveName}'");
-            CasllAmiitool($"-e -k {retailKey} -i \"{name}\" -o \"{saveName}\"");
+
+            if (!string.IsNullOrEmpty(savePath))
+            {
+                if (!Directory.Exists(savePath))
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+            }
+
+            savePath = Path.Combine(savePath, saveName);
+            CallAmiitool($"-e -k {retailKey} -i \"{name}\" -o \"{savePath}\"");
         }
 
-        private static void CasllAmiitool(string args)
+        private static void CallAmiitool(string args)
         {
             var amiitoolProc = new Process();
             amiitoolProc.StartInfo = new ProcessStartInfo()
