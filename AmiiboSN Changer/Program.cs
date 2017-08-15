@@ -1,187 +1,176 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace AmiiboSN_Changer
 {
     public class Program
     {
-        private const string amiitool = "amiitool.exe";
-        private const string retailKey = "key_retail.bin";
+        private const string amiitoolFilePath = "amiitool.exe";
+        private const string retailKeyFilePath = "key_retail.bin";
 
-        static void Main(string[] args)
+        private static AmiiToolHelper amiiTool = null;
+
+        public static void Main(string[] args)
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Use asnc.exe \"FILE\" AMOUNT");
+                WriteError("Use 'asnc.exe \"FILE\" <AMOUNT> \"<OUTPUT>\"'.");
+                WriteError("Example: 'asnc.exe \"mario.bin\" 3 \".\\newAmiibos\"'.");
                 return;
             }
 
-            var fileOrg = args[0];
-            if (!File.Exists(fileOrg))
+            if (!File.Exists(amiitoolFilePath))
             {
-                Console.WriteLine($"Couldn't find '{fileOrg}'");
+                WriteError($"Couldn't find '{amiitoolFilePath}' next to asnc.exe");
                 return;
             }
 
-            if (Environment.CurrentDirectory != AppDomain.CurrentDomain.BaseDirectory)
+            if (!File.Exists(retailKeyFilePath))
             {
-                Console.WriteLine("Changed Working Directory to the directory of asnc.exe");
-                Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                WriteError($"Couldn't find '{retailKeyFilePath}' next to asnc.exe");
+                return;
+            }
+
+            var amiiboFilePath = args[0];
+            if (!File.Exists(amiiboFilePath))
+            {
+                WriteError($"Couldn't find '{amiiboFilePath}'");
+                return;
             }
 
             var amount = 1;
             if (args.Length >= 2)
             {
                 var amountStr = args[1];
-                int.TryParse(amountStr, out amount);
+                if (!int.TryParse(amountStr, out amount))
+                {
+                    WriteError($"'{amountStr}' is not a vaild number.");
+                    return;
+                }
             }
 
-            var output = string.Empty;
+            if (Environment.CurrentDirectory != AppDomain.CurrentDomain.BaseDirectory)
+            {
+                Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                WriteInfo($"Changed Working Directory to '{Environment.CurrentDirectory}'");
+            }
+
+            var output = Environment.CurrentDirectory;
             if (args.Length >= 3)
             {
                 output = args[2];
             }
 
-            if (!File.Exists(amiitool))
+            amiiTool = new AmiiToolHelper(amiitoolFilePath, retailKeyFilePath);
+            amiiTool.AmiiToolResult += AmiiTool_AmiiToolResult;
+            Execute(amiiboFilePath, amount, output);
+        }
+
+        private static void AmiiTool_AmiiToolResult(object sender, Events.AmiiToolResultEventArgs e)
+        {
+            if (!e.IsError)
             {
-                Console.WriteLine($"Couldn't find '{amiitool}' near asnc.exe");
                 return;
             }
 
-            if (!File.Exists(retailKey))
-            {
-                Console.WriteLine($"Couldn't find '{retailKey}' near asnc.exe");
-                return;
-            }
-
-            Console.WriteLine("This tool is a C# copy of AnalogMan's Python script. Props to him");
-            Console.WriteLine("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
-            var fileDecrypted = DecrytAmiibo(fileOrg);
-            for (int nr = 0; nr < amount; nr++)
-            {
-                var serialParts = GenerateSerial();
-                var chk1 = serialParts[0] ^ serialParts[1] ^ serialParts[2];
-                var chk2 = serialParts[3] ^ serialParts[4] ^ serialParts[5] ^ serialParts[6];
-
-                var modResult = ModifyFile(fileDecrypted, serialParts, chk1, chk2);
-                if (!modResult)
-                {
-                    Console.Error.WriteLine($"Failed modifing '{fileDecrypted}'");
-                }
-                else
-                {
-                    EncryptAmiibo(fileDecrypted, $"{Path.GetFileNameWithoutExtension(fileOrg)}_ASNC-{nr + 1}.bin", output);
-                }
-            }
-            Console.WriteLine("Cleaning up");
-            File.Delete(fileDecrypted);
-            Console.WriteLine("Done");
-        }
-
-        private static bool ModifyFile(string orgFilePath, int[] serialParts, int chk1, int chk2)
-        {
-            Console.WriteLine($"Modifing '{Path.GetFileName(orgFilePath)}'");
-            try
-            {
-                using (Stream stream = File.Open(orgFilePath, FileMode.Open))
-                {
-                    stream.Position = 0;
-                    stream.Write(new[] { (byte)chk2 }, 0, 1);
-
-                    stream.Position = 0x1D4;
-                    var serialBytes = new byte[8];
-                    serialBytes[0] = (byte)chk1;
-                    for (int i = 1; i < serialBytes.Length; i++)
-                    {
-                        serialBytes[i] = (byte)serialParts[i - 1];
-                    }
-                    stream.Write(serialBytes, 0, serialBytes.Length);
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private static int[] GenerateSerial()
-        {
-            Console.WriteLine("Generating new \"unique\" serial");
-            var serialParts = new int[7];
-            var r = new Random();
-            for (int i = 0; i < serialParts.Length; i++)
-            {
-                serialParts[i] = r.Next(0, 255);
-            }
-
-            return serialParts;
-        }
-
-        private static string DecrytAmiibo(string orgFilePath)
-        {
-            Console.WriteLine($"Decrypting '{Path.GetFileName(orgFilePath)}'");
-            var fileDecrypted = $"{Path.GetFileName(orgFilePath)}.decrypted";
-
-            if (File.Exists(fileDecrypted))
-            {
-                Console.WriteLine("Found old decrypted file. AAaaaand it's gone");
-                File.Delete(fileDecrypted);
-            }
-
-            CallAmiitool($"-d -k {retailKey} -i \"{orgFilePath}\" -o \"{fileDecrypted}\"");
-
-            return fileDecrypted;
-        }
-
-        private static void EncryptAmiibo(string name, string saveName, string savePath)
-        {
-            Console.WriteLine($"Encrypting '{name}' as '{saveName}'");
-
-            if (!string.IsNullOrEmpty(savePath))
-            {
-                if (!Directory.Exists(savePath))
-                {
-                    Directory.CreateDirectory(savePath);
-                }
-            }
-
-            savePath = Path.Combine(savePath, saveName);
-            CallAmiitool($"-e -k {retailKey} -i \"{name}\" -o \"{savePath}\"");
-        }
-
-        private static void CallAmiitool(string args)
-        {
-            var amiitoolProc = new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = amiitool,
-                    Arguments = args,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardError = true
-                }
-            };
-            amiitoolProc.Start();
-            amiitoolProc.WaitForExit();
-            string error = amiitoolProc.StandardError.ReadToEnd();
-            if (!string.IsNullOrEmpty(error))
-            {
-                AmiitoolErrorDataReceived(error);
-            }
-        }
-
-        private static void AmiitoolErrorDataReceived(string error)
-        {
-            Console.Error.WriteLine("Got error calling amiitool.exe:");
-            Console.Error.WriteLine(error);
+            WriteError("Error while executing amiitool");
+            WriteError($"Arguments used: '{e.Args}'");
+            WriteError($"Error Message received: '{e.Result}'");
             Environment.Exit(1);
+        }
+
+        private static void Execute(string amiiboFilePath, int amount, string output)
+        {
+            WriteInfo("This tool is a C# copy of AnalogMan's Python script.");
+            WriteInfo("_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_");
+            Thread.Sleep(500);
+
+            WriteInfo($"Decrypting: {amiiboFilePath}");
+            var decryptedAmiiboFilePath = amiiTool.DecryptAmiibo(amiiboFilePath);
+            OneLineUp();
+            WriteDone($"Decrypting: {amiiboFilePath}");
+
+            Console.WriteLine();
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - -");
+            Console.WriteLine();
+
+            for (int nr = 1; nr <= amount; nr++)
+            {
+                try
+                {
+                    WriteInfo($"[Amiibo ({nr})] Generating new Serial");
+                    amiiTool.GenerateSerial(out byte[] serial, out byte firstChecksum, out byte secondChecksum);
+                    OneLineUp();
+                    WriteDone($"[Amiibo ({nr})] Generating new Serial");
+
+                    WriteInfo($"[Amiibo ({nr})] Writing Serial to Amiibo");
+                    amiiTool.SetAmiiboSerial(decryptedAmiiboFilePath, serial, firstChecksum, secondChecksum);
+                    OneLineUp();
+                    WriteDone($"[Amiibo ({nr})] Writing Serial to Amiibo");
+
+                    var newAmiiboFileName = $"{Path.GetFileNameWithoutExtension(amiiboFilePath)}_ASNC-{nr}.bin";
+                    var outputPath = Path.Combine(Path.GetFullPath(output), newAmiiboFileName);
+                    WriteInfo($"[Amiibo ({nr})] Encrypting: {newAmiiboFileName}");
+                    amiiTool.EncryptAmiibo(decryptedAmiiboFilePath, outputPath);
+                    OneLineUp();
+                    WriteDone($"[Amiibo ({nr})] Encrypting: {newAmiiboFileName}");
+                    Console.WriteLine();
+                }
+                catch (Exception ex)
+                {
+                    WriteError($"Error processing for Amiibo ({nr})");
+                    WriteError(ex.Message);
+                }
+            }
+
+            WriteInfo("Cleaning up");
+            amiiTool.CleanUp(amiiboFilePath, true);
+            OneLineUp();
+            WriteDone("Cleaning up");
+        }
+
+        private static void OneLineUp()
+        {
+            var lastLine = Console.CursorTop - 1;
+            if (lastLine < 0)
+            {
+                lastLine = 0;
+            }
+
+            Console.SetCursorPosition(0, lastLine);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, lastLine);
+        }
+
+        private static void WriteError(string text, params object[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("ERROR");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"] {string.Format(text, args)}");
+        }
+
+        private static void WriteInfo(string text, params object[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("INFO");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"] {string.Format(text, args)}");
+        }
+
+        private static void WriteDone(string text, params object[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("[");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("DONE");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"] {string.Format(text, args)}");
         }
     }
 }
