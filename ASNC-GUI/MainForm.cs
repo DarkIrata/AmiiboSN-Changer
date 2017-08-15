@@ -29,7 +29,7 @@ namespace ASNC_GUI
                 {
                     foreach (var file in fd.FileNames)
                     {
-                        this.lbBins.Items.Add(file);
+                        this.listBins.Items.Add(file);
                     }
                 }
             }
@@ -37,21 +37,21 @@ namespace ASNC_GUI
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            if (this.lbBins.Items.Count == 0)
+            if (this.listBins.Items.Count == 0)
             {
                 return;
             }
 
-            var selectedItems = this.lbBins.SelectedItems.Cast<object>().ToList();
+            var selectedItems = this.listBins.SelectedItems.Cast<object>().ToList();
             foreach (var item in selectedItems)
             {
-                this.lbBins.Items.Remove(item);
+                this.listBins.Items.Remove(item);
             }
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            foreach (string bin in this.lbBins.Items)
+            foreach (string bin in this.listBins.Items)
             {
                 if (!File.Exists("asnc.exe"))
                 {
@@ -69,16 +69,17 @@ namespace ASNC_GUI
                     args += $" \"{this.tbOutputPath.Text}\"";
                 }
 
-                var process = new Process();
-                process.StartInfo = new ProcessStartInfo()
+                var process = new Process()
                 {
-                    FileName = asncTool,
-                    Arguments = args,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        FileName = asncTool,
+                        Arguments = args,
+                        UseShellExecute = false,
+                        CreateNoWindow = true,
+                        RedirectStandardOutput = true
+                    }
                 };
-
                 process.Start();
                 process.WaitForExit();
 

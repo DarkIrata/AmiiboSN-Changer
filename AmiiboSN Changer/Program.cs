@@ -157,14 +157,16 @@ namespace AmiiboSN_Changer
 
         private static void CallAmiitool(string args)
         {
-            var amiitoolProc = new Process();
-            amiitoolProc.StartInfo = new ProcessStartInfo()
+            var amiitoolProc = new Process()
             {
-                FileName = amiitool,
-                Arguments = args,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                RedirectStandardError = true
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = amiitool,
+                    Arguments = args,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true
+                }
             };
             amiitoolProc.Start();
             amiitoolProc.WaitForExit();
