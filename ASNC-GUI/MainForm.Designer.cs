@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.listBins = new System.Windows.Forms.ListBox();
-            this.tbToolOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.amount = new System.Windows.Forms.NumericUpDown();
@@ -42,7 +41,10 @@
             this.btnConvert = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.rtbOutput = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.amount)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBins
@@ -57,20 +59,6 @@
             this.listBins.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBins.Size = new System.Drawing.Size(526, 119);
             this.listBins.TabIndex = 0;
-            // 
-            // tbToolOutput
-            // 
-            this.tbToolOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbToolOutput.BackColor = System.Drawing.Color.White;
-            this.tbToolOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbToolOutput.Location = new System.Drawing.Point(15, 272);
-            this.tbToolOutput.Multiline = true;
-            this.tbToolOutput.Name = "tbToolOutput";
-            this.tbToolOutput.ReadOnly = true;
-            this.tbToolOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbToolOutput.Size = new System.Drawing.Size(526, 148);
-            this.tbToolOutput.TabIndex = 3;
             // 
             // label1
             // 
@@ -217,12 +205,36 @@
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // rtbOutput
+            // 
+            this.rtbOutput.BackColor = System.Drawing.Color.White;
+            this.rtbOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbOutput.Location = new System.Drawing.Point(0, 0);
+            this.rtbOutput.Name = "rtbOutput";
+            this.rtbOutput.ReadOnly = true;
+            this.rtbOutput.Size = new System.Drawing.Size(524, 150);
+            this.rtbOutput.TabIndex = 13;
+            this.rtbOutput.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.rtbOutput);
+            this.panel1.Location = new System.Drawing.Point(15, 272);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(526, 152);
+            this.panel1.TabIndex = 14;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(604, 436);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnOutput);
@@ -232,7 +244,6 @@
             this.Controls.Add(this.amount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbToolOutput);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.listBins);
@@ -241,6 +252,7 @@
             this.Name = "MainForm";
             this.Text = "Amiibo SN Changer";
             ((System.ComponentModel.ISupportInitialize)(this.amount)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,7 +263,6 @@
         private System.Windows.Forms.ListBox listBins;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDel;
-        private System.Windows.Forms.TextBox tbToolOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown amount;
@@ -261,6 +272,8 @@
         private System.Windows.Forms.Button btnOutput;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnConvert;
+        private System.Windows.Forms.RichTextBox rtbOutput;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

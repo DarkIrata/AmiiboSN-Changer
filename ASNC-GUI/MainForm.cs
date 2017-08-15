@@ -5,17 +5,63 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using AmiiboSN_Changer;
+using ASNC_GUI.Extensions;
 
 namespace ASNC_GUI
 {
     public partial class MainForm : Form
     {
-        private const string asncTool = "asnc.exe";
+        private const string amiitoolFilePath = "amiitool.exe";
+        private const string retailKeyFilePath = "key_retail.bin";
+
+        private AmiiToolHelper amiiTool = null;
+        private bool gotAmiiToolError = false;
 
         public MainForm()
         {
             this.InitializeComponent();
+
+            if (!File.Exists(amiitoolFilePath))
+            {
+                this.rtbOutput.WriteErrorLine($"Couldn't find '{amiitoolFilePath}' next to asnc.exe");
+                this.SetControls(false);
+            }
+
+            if (!File.Exists(retailKeyFilePath))
+            {
+                this.rtbOutput.WriteErrorLine($"Couldn't find '{retailKeyFilePath}' next to asnc.exe");
+                this.SetControls(false);
+            }
+
+            this.tbOutputPath.Text = Application.StartupPath;
+            this.amiiTool = new AmiiToolHelper(amiitoolFilePath, retailKeyFilePath);
+            this.amiiTool.AmiiToolResult += this.AmiiTool_AmiiToolResult;
+        }
+
+        private void AmiiTool_AmiiToolResult(object sender, AmiiboSN_Changer.Events.AmiiToolResultEventArgs e)
+        {
+            if (!e.IsError)
+            {
+                return;
+            }
+
+            this.rtbOutput.WriteErrorLine("Error while executing amiitool");
+            this.rtbOutput.WriteErrorLine($"Arguments used: '{e.Args}'");
+            this.rtbOutput.WriteErrorLine($"Error Message received: '{e.Result}'");
+            this.gotAmiiToolError = true;
+        }
+
+        private void SetControls(bool enabled)
+        {
+            this.btnAdd.Enabled = enabled;
+            this.btnDel.Enabled = enabled;
+            this.btnConvert.Enabled = enabled;
+            this.btnOutput.Enabled = enabled;
+            this.tbOutputPath.ReadOnly = !enabled;
+            this.amount.ReadOnly = !enabled;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -51,46 +97,66 @@ namespace ASNC_GUI
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-            foreach (string bin in this.listBins.Items)
+            this.rtbOutput.Clear();
+            this.SetControls(false);
+
+            Task.Run(() =>
             {
-                if (!File.Exists("asnc.exe"))
-                {
-                    this.AppendOutputLine($"Missing asnc.exe in '{Application.StartupPath}'");
-                }
 
-                if (!File.Exists(bin))
+                foreach (string amiiboFilePath in this.listBins.Items)
                 {
-                    this.AppendOutputLine($"Couldn't find '{bin}'");
-                }
+                    this.rtbOutput.WriteInfoLine($"Decrypting: {Path.GetFileNameWithoutExtension(amiiboFilePath)}");
+                    var decryptedAmiiboFilePath = this.amiiTool.DecryptAmiibo(amiiboFilePath);
+                    this.rtbOutput.WriteDoneLine($"Decrypting: {Path.GetFileNameWithoutExtension(amiiboFilePath)}", true);
 
-                var args = $"\"{bin}\" {this.amount.Value}";
-                if (!string.IsNullOrEmpty(this.tbOutputPath.Text))
-                {
-                    args += $" \"{this.tbOutputPath.Text}\"";
-                }
-
-                var process = new Process()
-                {
-                    StartInfo = new ProcessStartInfo()
+                    for (int nr = 1; nr <= this.amount.Value; nr++)
                     {
-                        FileName = asncTool,
-                        Arguments = args,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true
+                        try
+                        {
+                            this.rtbOutput.WriteInfoLine($"[Amiibo ({nr})] Generating new Serial");
+                            this.amiiTool.GenerateSerial(out byte[] serial, out byte firstChecksum, out byte secondChecksum);
+                            this.rtbOutput.WriteDoneLine($"[Amiibo ({nr})] Generating new Serial", true);
+
+                            this.rtbOutput.WriteInfoLine($"[Amiibo ({nr})] Writing Serial to Amiibo");
+                            this.amiiTool.SetAmiiboSerial(decryptedAmiiboFilePath, serial, firstChecksum, secondChecksum);
+                            this.rtbOutput.WriteDoneLine($"[Amiibo ({nr})] Writing Serial to Amiibo", true);
+
+                            var newAmiiboFileName = $"{Path.GetFileNameWithoutExtension(amiiboFilePath)}_ASNC-{nr}.bin";
+                            var outputPath = Path.Combine(Path.GetFullPath(this.tbOutputPath.Text), newAmiiboFileName);
+                            this.rtbOutput.WriteInfoLine($"[Amiibo ({nr})] Encrypting: {newAmiiboFileName}");
+                            this.amiiTool.EncryptAmiibo(decryptedAmiiboFilePath, outputPath);
+                            this.rtbOutput.WriteDoneLine($"[Amiibo ({nr})] Encrypting: {newAmiiboFileName}", true);
+
+                            if (this.gotAmiiToolError)
+                            {
+                                break;
+                            }
+
+                            if (nr != this.amount.Value)
+                            {
+                                this.Invoke((Action)(() => this.rtbOutput.AppendText(Environment.NewLine)));
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            this.rtbOutput.WriteErrorLine($"Error processing for Amiibo ({nr})");
+                            this.rtbOutput.WriteErrorLine(ex.Message);
+                        }
                     }
-                };
-                process.Start();
-                process.WaitForExit();
 
-                string data = process.StandardOutput.ReadToEnd();
-                AppendOutputLine(data);
-            }
-        }
+                    this.rtbOutput.WriteInfoLine($"Cleaning up {Path.GetFileNameWithoutExtension(amiiboFilePath)}");
+                    this.amiiTool.CleanUp(amiiboFilePath, true);
+                    this.rtbOutput.WriteDoneLine($"Cleaning up {Path.GetFileNameWithoutExtension(amiiboFilePath)}", true);
+                    if (this.gotAmiiToolError)
+                    {
+                        break;
+                    }
 
-        private void AppendOutputLine(string text)
-        {
-            this.tbToolOutput.AppendText($"[{DateTime.Now}] {text}{Environment.NewLine}");
+                    this.Invoke((Action)(() => this.rtbOutput.AppendText(Environment.NewLine)));
+                }
+
+                this.Invoke((Action)(() => this.SetControls(true)));
+            });
         }
 
         private void btnOutput_Click(object sender, EventArgs e)
@@ -98,7 +164,6 @@ namespace ASNC_GUI
             using (var fbd = new FolderBrowserDialog())
             {
                 fbd.SelectedPath = Application.StartupPath;
-
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
                     this.tbOutputPath.Text = fbd.SelectedPath;
