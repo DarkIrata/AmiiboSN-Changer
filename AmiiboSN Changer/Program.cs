@@ -145,30 +145,25 @@ namespace AmiiboSN_Changer
 
         private static void WriteError(string text, params object[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("ERROR");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine($"] {string.Format(text, args)}");
+            WritePrefixed(ConsoleColor.Red, "ERROR", text, args);
         }
 
         private static void WriteInfo(string text, params object[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write("INFO");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine($"] {string.Format(text, args)}");
+            WritePrefixed(ConsoleColor.Cyan, "INFO", text, args);
         }
 
         private static void WriteDone(string text, params object[] args)
         {
+            WritePrefixed(ConsoleColor.Green, "DONE", text, args);
+        }
+
+        private static void WritePrefixed(ConsoleColor color, string prefix, string text, params object[] args)
+        {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("DONE");
+            Console.ForegroundColor = color;
+            Console.Write(prefix);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"] {string.Format(text, args)}");
         }
