@@ -1,22 +1,29 @@
 # AmiiboSN-Changer
 This tool is a C# copy of AnalogMan's Python script.
 http://gbatemp.net/threads/release-amiibo-bin-serial-changer.464702/
-All prop to him.
-I just don't like to install python.
 
-This tool generates new "unique" keys and write them into the Amiibo bin files.
-Thats make it possible to use for example the same Amiibo multiple times in a game (for example Zelda Breath of the Wild).
+I don't like to install python... thats the reason for the C# Port..
+
+This tool generates a new "unique" serial and write it into the Amiibo bin file.
+Thats make it possible to use for example the same Amiibo multiple times in a game (for example TLoZ Breath of the Wild).
 
 ## Installation
-You just need the key_retail.bin.
-Google for it. It is Nintendo copyrighted, so i can't include it.
+You just need the key_retail.bin next to the asnc.exe
+   Google for it. I can't include it because of the copyright.
 
-## Usage
-The asnc.exe have to be called with 1 or 2 parameters.
-First parameter is the path to the Amiibo.bin file.
+## Usage - GUI
+Open it up. Its explain itself! 
 
-- Examples for 5 different SSB4_Link Amiibo's.
-   > asnc.exe "SSB4_Link.bin" 5
+## Usage - Console
+The asnc.exe have to be called with at least 1 parameter.
+
+Available parameters:
+1 = Amiibo Bin Fil Path
+2 (Optional) = Amount
+3 (Optional) = Output Path
+
+Example for 3 different Mario Amiibos in my Amiibo Folder:
+   > asnc.exe "C:\Amiibos\Mario.bin" 3 "C:\Amiibos\NewUnique"
 
 ## Contributing
 1. Fork it!
@@ -26,5 +33,5 @@ First parameter is the path to the Amiibo.bin file.
 5. Submit a pull request :D
 
 ## Credits
-AnalogMan - Who had the idea for the wrapper application
+AnalogMan - Python Version and the idea for a wrapper Tool
 socram888 - Amiitool 
