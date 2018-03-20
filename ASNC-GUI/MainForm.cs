@@ -98,6 +98,7 @@ namespace ASNC_GUI
         private void btnConvert_Click(object sender, EventArgs e)
         {
             this.rtbOutput.Clear();
+            this.amiiTool.AfterSwitchV5Update = this.afterSwitch5Update.Checked;
             this.SetControls(false);
 
             Task.Run(() =>

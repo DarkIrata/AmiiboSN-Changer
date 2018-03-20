@@ -43,6 +43,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.afterSwitch5Update = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.amount)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +59,7 @@
             this.listBins.Location = new System.Drawing.Point(15, 28);
             this.listBins.Name = "listBins";
             this.listBins.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBins.Size = new System.Drawing.Size(526, 119);
+            this.listBins.Size = new System.Drawing.Size(526, 158);
             this.listBins.TabIndex = 0;
             // 
             // label1
@@ -75,7 +77,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label2.Location = new System.Drawing.Point(12, 165);
+            this.label2.Location = new System.Drawing.Point(12, 207);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(158, 16);
             this.label2.TabIndex = 5;
@@ -85,7 +87,7 @@
             // 
             this.amount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.amount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.amount.Location = new System.Drawing.Point(151, 194);
+            this.amount.Location = new System.Drawing.Point(151, 236);
             this.amount.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -98,7 +100,7 @@
             0});
             this.amount.Name = "amount";
             this.amount.Size = new System.Drawing.Size(87, 20);
-            this.amount.TabIndex = 6;
+            this.amount.TabIndex = 3;
             this.amount.Value = new decimal(new int[] {
             1,
             0,
@@ -109,7 +111,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 196);
+            this.label3.Location = new System.Drawing.Point(28, 238);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 13);
             this.label3.TabIndex = 7;
@@ -119,7 +121,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(79, 223);
+            this.label4.Location = new System.Drawing.Point(79, 265);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 8;
@@ -128,10 +130,10 @@
             // tbOutputPath
             // 
             this.tbOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbOutputPath.Location = new System.Drawing.Point(151, 220);
+            this.tbOutputPath.Location = new System.Drawing.Point(151, 262);
             this.tbOutputPath.Name = "tbOutputPath";
             this.tbOutputPath.Size = new System.Drawing.Size(348, 20);
-            this.tbOutputPath.TabIndex = 9;
+            this.tbOutputPath.TabIndex = 4;
             // 
             // btnOutput
             // 
@@ -141,10 +143,10 @@
             this.btnOutput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
-            this.btnOutput.Location = new System.Drawing.Point(505, 220);
+            this.btnOutput.Location = new System.Drawing.Point(505, 262);
             this.btnOutput.Name = "btnOutput";
             this.btnOutput.Size = new System.Drawing.Size(36, 20);
-            this.btnOutput.TabIndex = 10;
+            this.btnOutput.TabIndex = 5;
             this.btnOutput.Text = "...";
             this.btnOutput.UseVisualStyleBackColor = true;
             this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
@@ -154,7 +156,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label5.Location = new System.Drawing.Point(12, 253);
+            this.label5.Location = new System.Drawing.Point(12, 325);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 16);
             this.label5.TabIndex = 11;
@@ -168,10 +170,10 @@
             this.btnConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConvert.Image = global::ASNC_GUI.Properties.Resources.play;
-            this.btnConvert.Location = new System.Drawing.Point(547, 272);
+            this.btnConvert.Location = new System.Drawing.Point(547, 344);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(45, 45);
-            this.btnConvert.TabIndex = 12;
+            this.btnConvert.TabIndex = 7;
             this.btnConvert.UseVisualStyleBackColor = false;
             this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
             // 
@@ -214,7 +216,7 @@
             this.rtbOutput.Name = "rtbOutput";
             this.rtbOutput.ReadOnly = true;
             this.rtbOutput.Size = new System.Drawing.Size(524, 150);
-            this.rtbOutput.TabIndex = 13;
+            this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             // 
             // panel1
@@ -223,17 +225,38 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.rtbOutput);
-            this.panel1.Location = new System.Drawing.Point(15, 272);
+            this.panel1.Location = new System.Drawing.Point(15, 344);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(526, 152);
             this.panel1.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(58, 290);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(87, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Switch v5.0.0 >=";
+            // 
+            // afterSwitch5Update
+            // 
+            this.afterSwitch5Update.AutoSize = true;
+            this.afterSwitch5Update.Location = new System.Drawing.Point(151, 290);
+            this.afterSwitch5Update.Name = "afterSwitch5Update";
+            this.afterSwitch5Update.Size = new System.Drawing.Size(15, 14);
+            this.afterSwitch5Update.TabIndex = 6;
+            this.afterSwitch5Update.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(604, 436);
+            this.ClientSize = new System.Drawing.Size(604, 508);
+            this.Controls.Add(this.afterSwitch5Update);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.label5);
@@ -274,6 +297,8 @@
         private System.Windows.Forms.Button btnConvert;
         private System.Windows.Forms.RichTextBox rtbOutput;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox afterSwitch5Update;
     }
 }
 

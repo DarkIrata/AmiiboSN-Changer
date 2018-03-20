@@ -15,7 +15,7 @@ namespace AmiiboSN_Changer
         {
             if (args.Length == 0)
             {
-                WriteError("Use 'asnc.exe \"FILE\" <AMOUNT> \"<OUTPUT>\"'.");
+                WriteError("Use 'asnc.exe \"FILE\" <AMOUNT> \"<OUTPUT>\" \"<AFTER_SWTICH_v5_UPDATE>\"'.");
                 WriteError("Example: 'asnc.exe \"mario.bin\" 3 \".\\newAmiibos\"'.");
                 return;
             }
@@ -61,9 +61,22 @@ namespace AmiiboSN_Changer
             {
                 output = args[2];
             }
-
+            
             amiiTool = new AmiiToolHelper(amiitoolFilePath, retailKeyFilePath);
             amiiTool.AmiiToolResult += AmiiTool_AmiiToolResult;
+
+            var afterSwitchV5 = false;
+            if (args.Length >= 4)
+            {
+                if (!bool.TryParse(args[3], out afterSwitchV5))
+                {
+                    WriteError($"'{args[3]}' is not a vaild bool.");
+                    return;
+                }
+            }
+
+            amiiTool.AfterSwitchV5Update = afterSwitchV5;
+
             Execute(amiiboFilePath, amount, output);
         }
 

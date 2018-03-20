@@ -13,6 +13,8 @@ namespace AmiiboSN_Changer
         private readonly string amiitoolFilePath = string.Empty;
         private readonly string retailKeyFilePath = string.Empty;
 
+        public bool AfterSwitchV5Update { get; set; } = false;
+
         public event EventHandler<AmiiToolResultEventArgs> AmiiToolResult;
 
         public AmiiToolHelper(string amiitoolFilePath, string retailKeyFilePath)
@@ -84,7 +86,7 @@ namespace AmiiboSN_Changer
                 serial[i] = (byte)r.Next(0, 255);
             }
 
-            firstChecksum = (byte)(serial[0] ^ serial[1] ^ serial[2]);
+            firstChecksum = (byte)(serial[0] ^ serial[1] ^ (!this.AfterSwitchV5Update ? serial[2] : 0x88));
             secondCecksum = (byte)(serial[3] ^ serial[4] ^ serial[5] ^ serial[6]);
         }
 
