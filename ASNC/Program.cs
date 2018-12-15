@@ -36,7 +36,7 @@ namespace ASNC
         private static AmiiboTag GetDecryptedAmiibo(string amiiboPath)
         {
             Console.WriteLine("Decrypting Amiibo");
-            var amiibo = AmiiboSNHelper.DecryptNtag(amiiboPath);
+            var amiibo = AmiiboSNHelper.LoadAndDecryptNtag(amiiboPath);
             if (amiibo == null || !amiibo.IsDecrypted)
             {
                 Console.WriteLine("Amiibo was not decrypted");

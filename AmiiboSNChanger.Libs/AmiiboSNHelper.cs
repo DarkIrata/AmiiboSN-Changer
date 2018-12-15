@@ -14,7 +14,7 @@ namespace AmiiboSNChanger.Libs
 
         private static RNGCryptoServiceProvider rngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
-        public static AmiiboTag DecryptNtag(string amiiboPath)
+        public static AmiiboTag LoadAndDecryptNtag(string amiiboPath)
         {
             if (!File.Exists(amiiboPath))
             {
