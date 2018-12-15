@@ -242,6 +242,7 @@
             // 
             // afterSwitch5Update
             // 
+            this.afterSwitch5Update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.afterSwitch5Update.AutoSize = true;
             this.afterSwitch5Update.Location = new System.Drawing.Point(151, 290);
             this.afterSwitch5Update.Name = "afterSwitch5Update";

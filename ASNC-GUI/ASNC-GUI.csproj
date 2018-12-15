@@ -95,11 +95,5 @@
   <ItemGroup>
     <Content Include="KeyChanger.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AmiiboSN Changer\AmiiboSN Changer.csproj">
-      <Project>{3b4e80bc-0d99-4d42-8ecc-4476a82abb83}</Project>
-      <Name>AmiiboSN Changer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
