@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <Reference Include="libamiibo">
-      <HintPath>..\Externel\LibAmiibo\netstandard2.0\libamiibo.dll</HintPath>
+      <HintPath>..\External\LibAmiibo\netstandard2.0\libamiibo.dll</HintPath>
     </Reference>
   </ItemGroup>
 

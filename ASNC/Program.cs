@@ -40,6 +40,7 @@ namespace ASNC
             if (amiibo == null || !amiibo.IsDecrypted)
             {
                 Console.WriteLine("Amiibo was not decrypted");
+                Console.WriteLine("Check if you are missing the key_retail.bin");
                 Environment.Exit(3);
             }
 
