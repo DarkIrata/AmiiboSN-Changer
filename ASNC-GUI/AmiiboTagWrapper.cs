@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 using ASNC_GUI.Properties;
 using LibAmiibo.Data;
@@ -8,27 +10,30 @@ namespace ASNC_GUI
 {
     public class AmiiboTagWrapper
     {
-        public AmiiboTag Amiibo { get; private set; }
+        public string FilePath { get; private set; }
 
-        public string Name => $"{this.Amiibo?.Amiibo?.CharacterName} ({this.Amiibo?.Amiibo?.AmiiboSetName})";
+        public AmiiboTag AmiiboTag { get; private set; }
 
-        public Image IsDecrypted => (this.Amiibo?.IsDecrypted ?? false) ? Resources.unlocked : Resources.locked;
+        public string Name => $"{this.AmiiboTag?.Amiibo?.RetailName} ({this.AmiiboTag?.Amiibo?.AmiiboSetName})";
 
-        public Image HasUserData => (this.Amiibo?.HasUserData ?? false) ? Resources.id_card : Resources.Empty;
+        public Image IsDecrypted => (this.AmiiboTag?.IsDecrypted ?? false) ? Resources.unlocked : Resources.locked;
 
-        public Image HasAppData => (this.Amiibo?.HasAppData ?? false) ? Resources.database : Resources.Empty;
+        public Image HasUserData => (this.AmiiboTag?.HasUserData ?? false) ? Resources.id_card : Resources.Empty;
+
+        public Image HasAppData => (this.AmiiboTag?.HasAppData ?? false) ? Resources.database : Resources.Empty;
 
         public Image AmiiboImage => this.GetBitmap(40, 40);
 
-        public AmiiboTagWrapper(AmiiboTag amiibo)
+        public AmiiboTagWrapper(string filePath, AmiiboTag amiibo)
         {
-            this.Amiibo = amiibo;
+            this.FilePath = filePath;
+            this.AmiiboTag = amiibo;
         }
 
         // https://github.com/rds1983/StbSharp/wiki/stb_image.h
         public Bitmap GetBitmap(int width, int height)
         {
-            var resizedImg = this.Amiibo?.Amiibo?.AmiiboImage.CreateResized(width, height);
+            var resizedImg = this.AmiiboTag?.Amiibo?.AmiiboImage.CreateResized(width, height);
             var data = resizedImg.Data;
 
             // Convert rgba to bgra
@@ -55,5 +60,8 @@ namespace ASNC_GUI
 
             return bmp;
         }
+
+        // Since the Amiibo was already loaded once, we can reload it instantly. If it fails. the user fucked someting up ¯\_(ツ)_/¯
+        public void ReloadAmiibo() => this.AmiiboTag = AmiiboTag.DecryptWithKeys(File.ReadAllBytes(this.FilePath));
     }
 }

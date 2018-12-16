@@ -3,6 +3,16 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Authors>Wladislaw Batt</Authors>
+    <Company>IrataProjects</Company>
+    <Copyright>Wladislaw Batt 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/DarkIrata/AmiiboSN-Changer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-Changer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-Changer</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
+    <Description>DotNet Application to help alter amiibo serial number.</Description>
   </PropertyGroup>
 
   <ItemGroup>

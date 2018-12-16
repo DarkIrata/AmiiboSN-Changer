@@ -89,7 +89,20 @@ namespace AmiiboSNChanger.Libs
             return result.Trim();
         }
 
-        public static bool EqualAmiiboTag(AmiiboTag at1, AmiiboTag at2) => 
+        public static byte[] CustomRandomizeSerial()
+        {
+            var newUID = new byte[7];
+            rngCryptoServiceProvider.GetBytes(newUID);
+            newUID[0] = 4;
+            if (newUID[4] == 136)
+            {
+                newUID[4]++;
+            }
+
+            return newUID;
+        }
+
+        public static bool EqualAmiiboTag(AmiiboTag at1, AmiiboTag at2) =>
                 StructuralComparisons.StructuralEqualityComparer.Equals(at1.UID, at2.UID) &&
                 at1.HasAppData == at2.HasAppData &&
                 at1.HasUserData == at2.HasUserData &&

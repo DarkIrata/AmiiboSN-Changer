@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Wladislaw Batt</Authors>
+    <Company>IrataProjects</Company>
+    <Description>LibAmiibo Helper Wrapper for AmiiboSNChanger</Description>
+    <Copyright>Wladislaw Batt 2018</Copyright>
+    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-Changer</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/DarkIrata/AmiiboSN-Changer/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-Changer</RepositoryUrl>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

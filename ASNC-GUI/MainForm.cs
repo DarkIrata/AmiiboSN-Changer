@@ -22,6 +22,7 @@ namespace ASNC_GUI
         public MainForm()
         {
             this.InitializeComponent();
+            this.CleanUpAmiiboDisplay();
 
             AmiiboSNHelper.ActionOutput += this.AmiiboSNHelper_ActionOutput;
 
@@ -36,9 +37,9 @@ namespace ASNC_GUI
                 var amiibo = AmiiboSNHelper.LoadAndDecryptNtag(file);
                 if (amiibo != null)
                 {
-                    if (!this.amiibos.Any(a => AmiiboSNHelper.EqualAmiiboTag(a.Amiibo, amiibo)))
+                    if (!this.amiibos.Any(a => AmiiboSNHelper.EqualAmiiboTag(a.AmiiboTag, amiibo)))
                     {
-                        this.amiibos.Add(new AmiiboTagWrapper(amiibo));
+                        this.amiibos.Add(new AmiiboTagWrapper(file, amiibo));
                     }
                     else
                     {
@@ -48,11 +49,28 @@ namespace ASNC_GUI
             }
         }
 
+        private void CleanUpAmiiboDisplay()
+        {
+            this.amiiboImage.Image = Properties.Resources.Empty;
+            this.lblAmiiboName.Text = "Amiibo Name";
+
+            this.tbStatueId.Clear();
+            this.tbSerial.Clear();
+            this.tbUID.Clear();
+            this.lblWrites.Text = "Write Counter:";
+
+            this.tbNickname.Clear();
+            this.tbOwner.Clear();
+            this.tbRegisterDate.Clear();
+
+            this.tbDataSource.Clear();
+            this.tbPlatform.Clear();
+        }
+
         private void AmiiboSNHelper_ActionOutput(object sender, ActionOutputEventArgs e)
         {
             if (!e.Successful)
             {
-                Console.WriteLine(e.Output);
                 MessageBox.Show(e.Output, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -138,7 +156,99 @@ namespace ASNC_GUI
             {
                 var row = this.dataGrid.SelectedRows[0];
                 var amiiboTagWrapper = (AmiiboTagWrapper)row.DataBoundItem;
-                this.amiiboImage.Image = amiiboTagWrapper.GetBitmap(256, 256);
+
+                this.CleanUpAmiiboDisplay();
+
+                this.amiiboImage.Image = amiiboTagWrapper.GetBitmap(170, 170);
+                this.lblAmiiboName.Text = amiiboTagWrapper.Name;
+
+                this.tbStatueId.Text = amiiboTagWrapper.AmiiboTag.Amiibo.StatueId;
+                this.tbSerial.Text = AmiiboSNHelper.GetBytesAsString(amiiboTagWrapper.AmiiboTag.NtagSerial.ToArray());
+                this.tbUID.Text = AmiiboSNHelper.GetBytesAsString(amiiboTagWrapper.AmiiboTag.UID);
+                this.lblWrites.Text = "Write Counter: " + amiiboTagWrapper.AmiiboTag.WriteCounter.ToString();
+
+                if (amiiboTagWrapper.AmiiboTag.HasUserData)
+                {
+                    this.tbNickname.Text = amiiboTagWrapper.AmiiboTag.AmiiboSettings.AmiiboUserData.AmiiboNickname;
+                    this.tbOwner.Text = amiiboTagWrapper.AmiiboTag.AmiiboSettings.AmiiboUserData.OwnerMii.MiiNickname;
+                    this.tbRegisterDate.Text = amiiboTagWrapper.AmiiboTag.AmiiboSettings.AmiiboUserData.AmiiboSetupDate.ToString("dd.MM.yyyy");
+                }
+
+                if (amiiboTagWrapper.AmiiboTag.HasAppData)
+                {
+                    this.tbDataSource.Text = "0" + amiiboTagWrapper.AmiiboTag.AmiiboSettings.AmiiboAppData.AppDataInitializationTitleID.TitleID.ToString("x2");
+                    this.tbPlatform.Text = amiiboTagWrapper.AmiiboTag.AmiiboSettings.AmiiboAppData.AppDataInitializationTitleID.Platform.ToString();
+                }
+            }
+        }
+
+        private void btnExecute_Click(object sender, EventArgs e)
+        {
+            this.tbOutput.ReadOnly = true;
+            this.btnExecute.Enabled = false;
+            this.numUpDown.ReadOnly = true;
+
+            try
+            {
+                var abort = false;
+                foreach (var item in this.amiibos)
+                {
+                    for (int i = 0; i < this.numUpDown.Value; i++)
+                    {
+                        var fileName = Path.GetFileNameWithoutExtension(item.FilePath) + AmiiboSNHelper.FileNameExtension + i + AmiiboSNHelper.FileType;
+                        var savePath = Path.Combine(this.tbOutput.Text, fileName);
+                        item.AmiiboTag.UID = AmiiboSNHelper.CustomRandomizeSerial();
+
+                        if (!item.AmiiboTag.IsUidValid())
+                        {
+                            var diagResult = MessageBox.Show($"Created invalid UID for '{fileName}'{Environment.NewLine}Yes to skip current amiibo batch{Environment.NewLine}No to skip only faulty amiibo{Environment.NewLine}Cancel to abort generating", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                            if (diagResult == DialogResult.Yes)
+                            {
+                                break;
+                            }
+                            else if (diagResult == DialogResult.Cancel)
+                            {
+                                abort = true;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            AmiiboSNHelper.EncryptNtag(savePath, item.AmiiboTag);
+                        }
+                    }
+
+                    item.ReloadAmiibo();
+                    
+                    if (abort)
+                    {
+                        break;
+                    }
+                }
+
+                MessageBox.Show($"Successfully generated {this.amiibos.Count * this.numUpDown.Value} Amiibos!", "Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while generating" + Environment.NewLine + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.tbOutput.ReadOnly = false;
+                this.btnExecute.Enabled = true;
+                this.numUpDown.ReadOnly = false;
+            }
+        }
+
+        private void btnOutputSelect_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                fbd.SelectedPath = Application.StartupPath;
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    this.tbOutput.Text = fbd.SelectedPath;
+                }
             }
         }
     }
