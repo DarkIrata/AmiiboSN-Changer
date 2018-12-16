@@ -28,278 +28,269 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.listBins = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.amount = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbOutputPath = new System.Windows.Forms.TextBox();
-            this.btnOutput = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnConvert = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
+            this.dataGrid = new System.Windows.Forms.DataGridView();
+            this.Image = new System.Windows.Forms.DataGridViewImageColumn();
+            this.AmiiboName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HasUserData = new System.Windows.Forms.DataGridViewImageColumn();
+            this.HasAppData = new System.Windows.Forms.DataGridViewImageColumn();
+            this.IsDecrypted = new System.Windows.Forms.DataGridViewImageColumn();
+            this.DeleteAmiibo = new System.Windows.Forms.DataGridViewImageColumn();
+            this.amiiboPanel = new System.Windows.Forms.Panel();
+            this.Divider1 = new System.Windows.Forms.Panel();
+            this.gridActionsPanel = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.rtbOutput = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.afterSwitch5Update = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.amount)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.amiiboImage = new System.Windows.Forms.PictureBox();
+            this.Divider2 = new System.Windows.Forms.Panel();
+            this.managerPanel = new System.Windows.Forms.Panel();
+            this.Divider3 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+            this.amiiboPanel.SuspendLayout();
+            this.gridActionsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).BeginInit();
+            this.managerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBins
+            // dataGrid
             // 
-            this.listBins.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataGrid.AllowDrop = true;
+            this.dataGrid.AllowUserToAddRows = false;
+            this.dataGrid.AllowUserToDeleteRows = false;
+            this.dataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBins.FormattingEnabled = true;
-            this.listBins.Location = new System.Drawing.Point(15, 28);
-            this.listBins.Name = "listBins";
-            this.listBins.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBins.Size = new System.Drawing.Size(526, 158);
-            this.listBins.TabIndex = 0;
+            this.dataGrid.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGrid.ColumnHeadersHeight = 30;
+            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Image,
+            this.AmiiboName,
+            this.HasUserData,
+            this.HasAppData,
+            this.IsDecrypted,
+            this.DeleteAmiibo});
+            this.dataGrid.Location = new System.Drawing.Point(0, 45);
+            this.dataGrid.MultiSelect = false;
+            this.dataGrid.Name = "dataGrid";
+            this.dataGrid.ReadOnly = true;
+            this.dataGrid.RowHeadersVisible = false;
+            this.dataGrid.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(234)))));
+            this.dataGrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGrid.RowTemplate.Height = 42;
+            this.dataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGrid.ShowEditingIcon = false;
+            this.dataGrid.Size = new System.Drawing.Size(591, 460);
+            this.dataGrid.TabIndex = 0;
+            this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
+            this.dataGrid.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellMouseEnter);
+            this.dataGrid.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellMouseLeave);
+            this.dataGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGrid_RowsAdded);
+            this.dataGrid.SelectionChanged += new System.EventHandler(this.dataGrid_SelectionChanged);
+            this.dataGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGrid_DragDrop);
+            this.dataGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataGrid_DragEnter);
             // 
-            // label1
+            // Image
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "1. Select Amiibo backups";
+            this.Image.DataPropertyName = "AmiiboImage";
+            this.Image.HeaderText = "";
+            this.Image.Name = "Image";
+            this.Image.ReadOnly = true;
+            this.Image.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Image.Width = 50;
             // 
-            // label2
+            // AmiiboName
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label2.Location = new System.Drawing.Point(12, 207);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "2. Adjust optional settings";
+            this.AmiiboName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AmiiboName.DataPropertyName = "Name";
+            this.AmiiboName.FillWeight = 200F;
+            this.AmiiboName.HeaderText = "Amiibo Name";
+            this.AmiiboName.Name = "AmiiboName";
+            this.AmiiboName.ReadOnly = true;
+            this.AmiiboName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // amount
+            // HasUserData
             // 
-            this.amount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.amount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.amount.Location = new System.Drawing.Point(151, 236);
-            this.amount.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.amount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.amount.Name = "amount";
-            this.amount.Size = new System.Drawing.Size(87, 20);
-            this.amount.TabIndex = 3;
-            this.amount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.HasUserData.DataPropertyName = "HasUserData";
+            this.HasUserData.HeaderText = "";
+            this.HasUserData.Name = "HasUserData";
+            this.HasUserData.ReadOnly = true;
+            this.HasUserData.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.HasUserData.ToolTipText = "Amiibo has a Mii registered";
+            this.HasUserData.Width = 32;
             // 
-            // label3
+            // HasAppData
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 238);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Amount of duplications:";
+            this.HasAppData.DataPropertyName = "HasAppData";
+            this.HasAppData.HeaderText = "";
+            this.HasAppData.Name = "HasAppData";
+            this.HasAppData.ReadOnly = true;
+            this.HasAppData.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.HasAppData.ToolTipText = "Amiibo has Gamedata";
+            this.HasAppData.Width = 32;
             // 
-            // label4
+            // IsDecrypted
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(79, 265);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Output path:";
+            this.IsDecrypted.DataPropertyName = "IsDecrypted";
+            this.IsDecrypted.HeaderText = "";
+            this.IsDecrypted.Name = "IsDecrypted";
+            this.IsDecrypted.ReadOnly = true;
+            this.IsDecrypted.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IsDecrypted.ToolTipText = "Status indicator about decryption while loading";
+            this.IsDecrypted.Width = 32;
             // 
-            // tbOutputPath
+            // DeleteAmiibo
             // 
-            this.tbOutputPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbOutputPath.Location = new System.Drawing.Point(151, 262);
-            this.tbOutputPath.Name = "tbOutputPath";
-            this.tbOutputPath.Size = new System.Drawing.Size(348, 20);
-            this.tbOutputPath.TabIndex = 4;
+            this.DeleteAmiibo.HeaderText = "";
+            this.DeleteAmiibo.Image = global::ASNC_GUI.Properties.Resources.garbage;
+            this.DeleteAmiibo.Name = "DeleteAmiibo";
+            this.DeleteAmiibo.ReadOnly = true;
+            this.DeleteAmiibo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DeleteAmiibo.ToolTipText = "Remove Amiibo from list";
+            this.DeleteAmiibo.Width = 32;
             // 
-            // btnOutput
+            // amiiboPanel
             // 
-            this.btnOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOutput.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnOutput.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.btnOutput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.btnOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
-            this.btnOutput.Location = new System.Drawing.Point(505, 262);
-            this.btnOutput.Name = "btnOutput";
-            this.btnOutput.Size = new System.Drawing.Size(36, 20);
-            this.btnOutput.TabIndex = 5;
-            this.btnOutput.Text = "...";
-            this.btnOutput.UseVisualStyleBackColor = true;
-            this.btnOutput.Click += new System.EventHandler(this.btnOutput_Click);
+            this.amiiboPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.amiiboPanel.Controls.Add(this.Divider1);
+            this.amiiboPanel.Controls.Add(this.gridActionsPanel);
+            this.amiiboPanel.Controls.Add(this.dataGrid);
+            this.amiiboPanel.Location = new System.Drawing.Point(0, 0);
+            this.amiiboPanel.Name = "amiiboPanel";
+            this.amiiboPanel.Size = new System.Drawing.Size(590, 505);
+            this.amiiboPanel.TabIndex = 1;
             // 
-            // label5
+            // Divider1
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label5.Location = new System.Drawing.Point(12, 325);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 16);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "3. Generate";
+            this.Divider1.BackColor = System.Drawing.Color.Silver;
+            this.Divider1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Divider1.Location = new System.Drawing.Point(0, 45);
+            this.Divider1.Name = "Divider1";
+            this.Divider1.Size = new System.Drawing.Size(590, 1);
+            this.Divider1.TabIndex = 2;
             // 
-            // btnConvert
+            // gridActionsPanel
             // 
-            this.btnConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConvert.FlatAppearance.BorderSize = 0;
-            this.btnConvert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.btnConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.btnConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConvert.Image = global::ASNC_GUI.Properties.Resources.play;
-            this.btnConvert.Location = new System.Drawing.Point(547, 344);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(45, 45);
-            this.btnConvert.TabIndex = 7;
-            this.btnConvert.UseVisualStyleBackColor = false;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
-            // 
-            // btnDel
-            // 
-            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDel.FlatAppearance.BorderSize = 0;
-            this.btnDel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.btnDel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDel.Image = global::ASNC_GUI.Properties.Resources.minus;
-            this.btnDel.Location = new System.Drawing.Point(547, 79);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(45, 45);
-            this.btnDel.TabIndex = 2;
-            this.btnDel.UseVisualStyleBackColor = false;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            this.gridActionsPanel.Controls.Add(this.btnAdd);
+            this.gridActionsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridActionsPanel.Location = new System.Drawing.Point(0, 0);
+            this.gridActionsPanel.Name = "gridActionsPanel";
+            this.gridActionsPanel.Size = new System.Drawing.Size(590, 45);
+            this.gridActionsPanel.TabIndex = 2;
             // 
             // btnAdd
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Image = global::ASNC_GUI.Properties.Resources.plus;
-            this.btnAdd.Location = new System.Drawing.Point(547, 28);
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Location = new System.Drawing.Point(545, 0);
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnAdd.Size = new System.Drawing.Size(45, 45);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // rtbOutput
+            // amiiboImage
             // 
-            this.rtbOutput.BackColor = System.Drawing.Color.White;
-            this.rtbOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbOutput.Location = new System.Drawing.Point(0, 0);
-            this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.ReadOnly = true;
-            this.rtbOutput.Size = new System.Drawing.Size(524, 150);
-            this.rtbOutput.TabIndex = 0;
-            this.rtbOutput.Text = "";
+            this.amiiboImage.InitialImage = global::ASNC_GUI.Properties.Resources.Empty;
+            this.amiiboImage.Location = new System.Drawing.Point(17, 12);
+            this.amiiboImage.Name = "amiiboImage";
+            this.amiiboImage.Size = new System.Drawing.Size(200, 200);
+            this.amiiboImage.TabIndex = 2;
+            this.amiiboImage.TabStop = false;
             // 
-            // panel1
+            // Divider2
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.Divider2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.rtbOutput);
-            this.panel1.Location = new System.Drawing.Point(15, 344);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(526, 152);
-            this.panel1.TabIndex = 14;
+            this.Divider2.BackColor = System.Drawing.Color.Silver;
+            this.Divider2.Location = new System.Drawing.Point(597, 12);
+            this.Divider2.Name = "Divider2";
+            this.Divider2.Size = new System.Drawing.Size(1, 481);
+            this.Divider2.TabIndex = 3;
             // 
-            // label6
+            // managerPanel
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(58, 290);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Switch v5.0.0 >=";
+            this.managerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.managerPanel.Controls.Add(this.Divider3);
+            this.managerPanel.Controls.Add(this.amiiboImage);
+            this.managerPanel.Location = new System.Drawing.Point(604, 0);
+            this.managerPanel.Name = "managerPanel";
+            this.managerPanel.Size = new System.Drawing.Size(450, 505);
+            this.managerPanel.TabIndex = 4;
             // 
-            // afterSwitch5Update
+            // Divider3
             // 
-            this.afterSwitch5Update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.afterSwitch5Update.AutoSize = true;
-            this.afterSwitch5Update.Location = new System.Drawing.Point(151, 290);
-            this.afterSwitch5Update.Name = "afterSwitch5Update";
-            this.afterSwitch5Update.Size = new System.Drawing.Size(15, 14);
-            this.afterSwitch5Update.TabIndex = 6;
-            this.afterSwitch5Update.UseVisualStyleBackColor = true;
+            this.Divider3.BackColor = System.Drawing.Color.Silver;
+            this.Divider3.Location = new System.Drawing.Point(13, 443);
+            this.Divider3.Name = "Divider3";
+            this.Divider3.Size = new System.Drawing.Size(422, 1);
+            this.Divider3.TabIndex = 3;
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(604, 508);
-            this.Controls.Add(this.afterSwitch5Update);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btnConvert);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnOutput);
-            this.Controls.Add(this.tbOutputPath);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.amount);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnDel);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.listBins);
+            this.ClientSize = new System.Drawing.Size(1054, 505);
+            this.Controls.Add(this.managerPanel);
+            this.Controls.Add(this.Divider2);
+            this.Controls.Add(this.amiiboPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(620, 460);
             this.Name = "MainForm";
-            this.Text = "Amiibo SN Changer";
-            ((System.ComponentModel.ISupportInitialize)(this.amount)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.Text = "Amiibo SN Changer - Manager";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            this.amiiboPanel.ResumeLayout(false);
+            this.gridActionsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).EndInit();
+            this.managerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBins;
+        private System.Windows.Forms.DataGridView dataGrid;
+        private System.Windows.Forms.Panel amiiboPanel;
+        private System.Windows.Forms.Panel gridActionsPanel;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnDel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown amount;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbOutputPath;
-        private System.Windows.Forms.Button btnOutput;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnConvert;
-        private System.Windows.Forms.RichTextBox rtbOutput;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox afterSwitch5Update;
+        private System.Windows.Forms.Panel Divider1;
+        private System.Windows.Forms.DataGridViewImageColumn Image;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AmiiboName;
+        private System.Windows.Forms.DataGridViewImageColumn HasUserData;
+        private System.Windows.Forms.DataGridViewImageColumn HasAppData;
+        private System.Windows.Forms.DataGridViewImageColumn IsDecrypted;
+        private System.Windows.Forms.DataGridViewImageColumn DeleteAmiibo;
+        private System.Windows.Forms.PictureBox amiiboImage;
+        private System.Windows.Forms.Panel Divider2;
+        private System.Windows.Forms.Panel managerPanel;
+        private System.Windows.Forms.Panel Divider3;
     }
 }
 
