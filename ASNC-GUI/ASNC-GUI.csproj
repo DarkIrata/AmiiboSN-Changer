@@ -102,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmiiboTagWrapper.cs" />
+    <Compile Include="InfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="KeyChanger.ico" />
+    <None Include="Resources\success.png" />
     <None Include="Resources\unlocked.png" />
     <None Include="Resources\locked.png" />
     <None Include="Resources\Empty.png" />
@@ -149,6 +159,8 @@
     <None Include="Resources\garbage_enter.png" />
     <None Include="Resources\id-card.png" />
     <None Include="Resources\database.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\Github.png" />
     <Content Include="Resources\plus.png" />
   </ItemGroup>
   <ItemGroup>

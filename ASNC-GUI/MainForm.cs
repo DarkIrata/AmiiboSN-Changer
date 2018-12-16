@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AmiiboSNChanger.Libs;
 using AmiiboSNChanger.Libs.Events;
-using LibAmiibo.Data;
 
 namespace ASNC_GUI
 {
@@ -250,6 +243,12 @@ namespace ASNC_GUI
                     this.tbOutput.Text = fbd.SelectedPath;
                 }
             }
+        }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            var infoForm = new InfoForm();
+            infoForm.ShowDialog();
         }
     }
 }

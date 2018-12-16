@@ -36,49 +36,51 @@
             this.HasUserData = new System.Windows.Forms.DataGridViewImageColumn();
             this.HasAppData = new System.Windows.Forms.DataGridViewImageColumn();
             this.IsDecrypted = new System.Windows.Forms.DataGridViewImageColumn();
-            this.DeleteAmiibo = new System.Windows.Forms.DataGridViewImageColumn();
             this.amiiboPanel = new System.Windows.Forms.Panel();
             this.Divider1 = new System.Windows.Forms.Panel();
             this.gridActionsPanel = new System.Windows.Forms.Panel();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.amiiboImage = new System.Windows.Forms.PictureBox();
             this.Divider2 = new System.Windows.Forms.Panel();
             this.managerPanel = new System.Windows.Forms.Panel();
-            this.Divider3 = new System.Windows.Forms.Panel();
-            this.lblAmiiboName = new System.Windows.Forms.Label();
-            this.lblNickname = new System.Windows.Forms.Label();
-            this.lblWrites = new System.Windows.Forms.Label();
-            this.tbNickname = new System.Windows.Forms.TextBox();
-            this.btnExecute = new System.Windows.Forms.Button();
-            this.lblCounter = new System.Windows.Forms.Label();
-            this.numUpDown = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.tbOwner = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblAmiiboNr = new System.Windows.Forms.Label();
-            this.tbStatueId = new System.Windows.Forms.TextBox();
-            this.tbRegisterDate = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.tbDataSource = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbPlatform = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbOutput = new System.Windows.Forms.TextBox();
-            this.btnOutputSelect = new System.Windows.Forms.Button();
-            this.tbSerial = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.tbUID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.tbSerial = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnOutputSelect = new System.Windows.Forms.Button();
+            this.tbOutput = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbPlatform = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbDataSource = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbRegisterDate = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbStatueId = new System.Windows.Forms.TextBox();
+            this.lblAmiiboNr = new System.Windows.Forms.Label();
+            this.tbOwner = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numUpDown = new System.Windows.Forms.NumericUpDown();
+            this.lblCounter = new System.Windows.Forms.Label();
+            this.tbNickname = new System.Windows.Forms.TextBox();
+            this.lblWrites = new System.Windows.Forms.Label();
+            this.lblNickname = new System.Windows.Forms.Label();
+            this.lblAmiiboName = new System.Windows.Forms.Label();
+            this.Divider3 = new System.Windows.Forms.Panel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnInfo = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnExecute = new System.Windows.Forms.Button();
+            this.amiiboImage = new System.Windows.Forms.PictureBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.DeleteAmiibo = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.amiiboPanel.SuspendLayout();
             this.gridActionsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).BeginInit();
             this.managerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGrid
@@ -182,16 +184,6 @@
             this.IsDecrypted.ToolTipText = "Status indicator about decryption while loading";
             this.IsDecrypted.Width = 32;
             // 
-            // DeleteAmiibo
-            // 
-            this.DeleteAmiibo.HeaderText = "";
-            this.DeleteAmiibo.Image = global::ASNC_GUI.Properties.Resources.garbage;
-            this.DeleteAmiibo.Name = "DeleteAmiibo";
-            this.DeleteAmiibo.ReadOnly = true;
-            this.DeleteAmiibo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.DeleteAmiibo.ToolTipText = "Remove Amiibo from list";
-            this.DeleteAmiibo.Width = 32;
-            // 
             // amiiboPanel
             // 
             this.amiiboPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -221,37 +213,7 @@
             this.gridActionsPanel.Location = new System.Drawing.Point(0, 0);
             this.gridActionsPanel.Name = "gridActionsPanel";
             this.gridActionsPanel.Size = new System.Drawing.Size(595, 45);
-            this.gridActionsPanel.TabIndex = 2;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnAdd.FlatAppearance.BorderSize = 0;
-            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Image = global::ASNC_GUI.Properties.Resources.plus;
-            this.btnAdd.Location = new System.Drawing.Point(550, 0);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnAdd.Size = new System.Drawing.Size(45, 45);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // amiiboImage
-            // 
-            this.amiiboImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.amiiboImage.InitialImage = global::ASNC_GUI.Properties.Resources.Empty;
-            this.amiiboImage.Location = new System.Drawing.Point(17, 12);
-            this.amiiboImage.Name = "amiiboImage";
-            this.amiiboImage.Size = new System.Drawing.Size(170, 170);
-            this.amiiboImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.amiiboImage.TabIndex = 2;
-            this.amiiboImage.TabStop = false;
+            this.gridActionsPanel.TabIndex = 1;
             // 
             // Divider2
             // 
@@ -267,6 +229,7 @@
             // 
             this.managerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.managerPanel.Controls.Add(this.btnInfo);
             this.managerPanel.Controls.Add(this.tbUID);
             this.managerPanel.Controls.Add(this.label7);
             this.managerPanel.Controls.Add(this.tbSerial);
@@ -301,88 +264,195 @@
             this.managerPanel.Size = new System.Drawing.Size(497, 505);
             this.managerPanel.TabIndex = 4;
             // 
-            // Divider3
+            // tbUID
             // 
-            this.Divider3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbUID.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbUID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbUID.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUID.Location = new System.Drawing.Point(257, 90);
+            this.tbUID.Name = "tbUID";
+            this.tbUID.ReadOnly = true;
+            this.tbUID.Size = new System.Drawing.Size(228, 20);
+            this.tbUID.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoEllipsis = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(222, 94);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 15);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "UID:";
+            // 
+            // tbSerial
+            // 
+            this.tbSerial.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbSerial.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSerial.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSerial.Location = new System.Drawing.Point(257, 64);
+            this.tbSerial.Name = "tbSerial";
+            this.tbSerial.ReadOnly = true;
+            this.tbSerial.Size = new System.Drawing.Size(228, 20);
+            this.tbSerial.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoEllipsis = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(213, 68);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 15);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Serial:";
+            // 
+            // btnOutputSelect
+            // 
+            this.btnOutputSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Divider3.BackColor = System.Drawing.Color.Silver;
-            this.Divider3.Location = new System.Drawing.Point(13, 412);
-            this.Divider3.Name = "Divider3";
-            this.Divider3.Size = new System.Drawing.Size(472, 1);
-            this.Divider3.TabIndex = 3;
+            this.btnOutputSelect.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnOutputSelect.FlatAppearance.BorderSize = 0;
+            this.btnOutputSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnOutputSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnOutputSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOutputSelect.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutputSelect.Location = new System.Drawing.Point(335, 458);
+            this.btnOutputSelect.Name = "btnOutputSelect";
+            this.btnOutputSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOutputSelect.Size = new System.Drawing.Size(47, 25);
+            this.btnOutputSelect.TabIndex = 11;
+            this.btnOutputSelect.Text = "...";
+            this.btnOutputSelect.UseVisualStyleBackColor = true;
+            this.btnOutputSelect.Click += new System.EventHandler(this.btnOutputSelect_Click);
             // 
-            // lblAmiiboName
+            // tbOutput
             // 
-            this.lblAmiiboName.AutoEllipsis = true;
-            this.lblAmiiboName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAmiiboName.Location = new System.Drawing.Point(193, 13);
-            this.lblAmiiboName.Name = "lblAmiiboName";
-            this.lblAmiiboName.Size = new System.Drawing.Size(292, 25);
-            this.lblAmiiboName.TabIndex = 4;
-            this.lblAmiiboName.Text = "Amiibo Name";
-            // 
-            // lblNickname
-            // 
-            this.lblNickname.AutoEllipsis = true;
-            this.lblNickname.AutoSize = true;
-            this.lblNickname.Location = new System.Drawing.Point(14, 209);
-            this.lblNickname.Name = "lblNickname";
-            this.lblNickname.Size = new System.Drawing.Size(64, 15);
-            this.lblNickname.TabIndex = 5;
-            this.lblNickname.Text = "Nickname:";
-            // 
-            // lblWrites
-            // 
-            this.lblWrites.AutoEllipsis = true;
-            this.lblWrites.AutoSize = true;
-            this.lblWrites.Location = new System.Drawing.Point(194, 115);
-            this.lblWrites.Name = "lblWrites";
-            this.lblWrites.Size = new System.Drawing.Size(84, 15);
-            this.lblWrites.TabIndex = 6;
-            this.lblWrites.Text = "Write Counter:";
-            // 
-            // tbNickname
-            // 
-            this.tbNickname.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbNickname.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbNickname.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNickname.Location = new System.Drawing.Point(17, 227);
-            this.tbNickname.Name = "tbNickname";
-            this.tbNickname.ReadOnly = true;
-            this.tbNickname.Size = new System.Drawing.Size(217, 20);
-            this.tbNickname.TabIndex = 7;
-            // 
-            // btnExecute
-            // 
-            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExecute.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnExecute.FlatAppearance.BorderSize = 0;
-            this.btnExecute.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnExecute.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecute.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExecute.Image = global::ASNC_GUI.Properties.Resources.play;
-            this.btnExecute.Location = new System.Drawing.Point(413, 415);
-            this.btnExecute.Name = "btnExecute";
-            this.btnExecute.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnExecute.Size = new System.Drawing.Size(72, 87);
-            this.btnExecute.TabIndex = 1;
-            this.btnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExecute.UseVisualStyleBackColor = true;
-            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
+            this.tbOutput.BackColor = System.Drawing.Color.White;
+            this.tbOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbOutput.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tbOutput.Location = new System.Drawing.Point(156, 458);
+            this.tbOutput.Name = "tbOutput";
+            this.tbOutput.Size = new System.Drawing.Size(177, 25);
+            this.tbOutput.TabIndex = 10;
             // 
-            // lblCounter
+            // label5
             // 
-            this.lblCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCounter.AutoSize = true;
-            this.lblCounter.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblCounter.Location = new System.Drawing.Point(13, 427);
-            this.lblCounter.Name = "lblCounter";
-            this.lblCounter.Size = new System.Drawing.Size(137, 19);
-            this.lblCounter.TabIndex = 8;
-            this.lblCounter.Text = "Amount to generate:";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label5.Location = new System.Drawing.Point(13, 462);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 19);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Output directory:";
+            // 
+            // tbPlatform
+            // 
+            this.tbPlatform.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbPlatform.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbPlatform.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPlatform.Location = new System.Drawing.Point(243, 268);
+            this.tbPlatform.Name = "tbPlatform";
+            this.tbPlatform.ReadOnly = true;
+            this.tbPlatform.Size = new System.Drawing.Size(217, 20);
+            this.tbPlatform.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoEllipsis = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(240, 250);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 15);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Platform:";
+            // 
+            // tbDataSource
+            // 
+            this.tbDataSource.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbDataSource.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbDataSource.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDataSource.Location = new System.Drawing.Point(243, 227);
+            this.tbDataSource.Name = "tbDataSource";
+            this.tbDataSource.ReadOnly = true;
+            this.tbDataSource.Size = new System.Drawing.Size(217, 20);
+            this.tbDataSource.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoEllipsis = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(240, 209);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 15);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Data from Game (TitleID):";
+            // 
+            // tbRegisterDate
+            // 
+            this.tbRegisterDate.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbRegisterDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbRegisterDate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbRegisterDate.Location = new System.Drawing.Point(17, 309);
+            this.tbRegisterDate.Name = "tbRegisterDate";
+            this.tbRegisterDate.ReadOnly = true;
+            this.tbRegisterDate.Size = new System.Drawing.Size(217, 20);
+            this.tbRegisterDate.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoEllipsis = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 291);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 15);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Register date:";
+            // 
+            // tbStatueId
+            // 
+            this.tbStatueId.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbStatueId.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbStatueId.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbStatueId.Location = new System.Drawing.Point(257, 38);
+            this.tbStatueId.Name = "tbStatueId";
+            this.tbStatueId.ReadOnly = true;
+            this.tbStatueId.Size = new System.Drawing.Size(228, 20);
+            this.tbStatueId.TabIndex = 0;
+            // 
+            // lblAmiiboNr
+            // 
+            this.lblAmiiboNr.AutoEllipsis = true;
+            this.lblAmiiboNr.AutoSize = true;
+            this.lblAmiiboNr.Location = new System.Drawing.Point(194, 42);
+            this.lblAmiiboNr.Name = "lblAmiiboNr";
+            this.lblAmiiboNr.Size = new System.Drawing.Size(57, 15);
+            this.lblAmiiboNr.TabIndex = 13;
+            this.lblAmiiboNr.Text = "Statue ID:";
+            // 
+            // tbOwner
+            // 
+            this.tbOwner.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbOwner.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbOwner.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbOwner.Location = new System.Drawing.Point(17, 268);
+            this.tbOwner.Name = "tbOwner";
+            this.tbOwner.ReadOnly = true;
+            this.tbOwner.Size = new System.Drawing.Size(217, 20);
+            this.tbOwner.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Mii-Owner:";
             // 
             // numUpDown
             // 
@@ -412,6 +482,108 @@
             0,
             0});
             // 
+            // lblCounter
+            // 
+            this.lblCounter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCounter.AutoSize = true;
+            this.lblCounter.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblCounter.Location = new System.Drawing.Point(13, 427);
+            this.lblCounter.Name = "lblCounter";
+            this.lblCounter.Size = new System.Drawing.Size(137, 19);
+            this.lblCounter.TabIndex = 8;
+            this.lblCounter.Text = "Amount to generate:";
+            // 
+            // tbNickname
+            // 
+            this.tbNickname.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tbNickname.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbNickname.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNickname.Location = new System.Drawing.Point(17, 227);
+            this.tbNickname.Name = "tbNickname";
+            this.tbNickname.ReadOnly = true;
+            this.tbNickname.Size = new System.Drawing.Size(217, 20);
+            this.tbNickname.TabIndex = 3;
+            // 
+            // lblWrites
+            // 
+            this.lblWrites.AutoEllipsis = true;
+            this.lblWrites.AutoSize = true;
+            this.lblWrites.Location = new System.Drawing.Point(194, 118);
+            this.lblWrites.Name = "lblWrites";
+            this.lblWrites.Size = new System.Drawing.Size(84, 15);
+            this.lblWrites.TabIndex = 6;
+            this.lblWrites.Text = "Write Counter:";
+            // 
+            // lblNickname
+            // 
+            this.lblNickname.AutoEllipsis = true;
+            this.lblNickname.AutoSize = true;
+            this.lblNickname.Location = new System.Drawing.Point(14, 209);
+            this.lblNickname.Name = "lblNickname";
+            this.lblNickname.Size = new System.Drawing.Size(64, 15);
+            this.lblNickname.TabIndex = 5;
+            this.lblNickname.Text = "Nickname:";
+            // 
+            // lblAmiiboName
+            // 
+            this.lblAmiiboName.AutoEllipsis = true;
+            this.lblAmiiboName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAmiiboName.Location = new System.Drawing.Point(193, 13);
+            this.lblAmiiboName.Name = "lblAmiiboName";
+            this.lblAmiiboName.Size = new System.Drawing.Size(292, 25);
+            this.lblAmiiboName.TabIndex = 4;
+            this.lblAmiiboName.Text = "Amiibo Name";
+            // 
+            // Divider3
+            // 
+            this.Divider3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Divider3.BackColor = System.Drawing.Color.Silver;
+            this.Divider3.Location = new System.Drawing.Point(13, 412);
+            this.Divider3.Name = "Divider3";
+            this.Divider3.Size = new System.Drawing.Size(472, 1);
+            this.Divider3.TabIndex = 3;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = global::ASNC_GUI.Properties.Resources.garbage;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.ToolTipText = "Remove Amiibo from list";
+            this.dataGridViewImageColumn1.Width = 32;
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnInfo.FlatAppearance.BorderSize = 0;
+            this.btnInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfo.Image = global::ASNC_GUI.Properties.Resources.info;
+            this.btnInfo.Location = new System.Drawing.Point(453, 374);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnInfo.Size = new System.Drawing.Size(32, 32);
+            this.btnInfo.TabIndex = 8;
+            this.btnInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ASNC_GUI.Properties.Resources.database;
+            this.pictureBox2.InitialImage = global::ASNC_GUI.Properties.Resources.Empty;
+            this.pictureBox2.Location = new System.Drawing.Point(243, 188);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ASNC_GUI.Properties.Resources.id_card;
@@ -423,206 +595,65 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // tbOwner
+            // btnExecute
             // 
-            this.tbOwner.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbOwner.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbOwner.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbOwner.Location = new System.Drawing.Point(17, 268);
-            this.tbOwner.Name = "tbOwner";
-            this.tbOwner.ReadOnly = true;
-            this.tbOwner.Size = new System.Drawing.Size(217, 20);
-            this.tbOwner.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoEllipsis = true;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 250);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Mii-Owner:";
-            // 
-            // lblAmiiboNr
-            // 
-            this.lblAmiiboNr.AutoEllipsis = true;
-            this.lblAmiiboNr.AutoSize = true;
-            this.lblAmiiboNr.Location = new System.Drawing.Point(194, 42);
-            this.lblAmiiboNr.Name = "lblAmiiboNr";
-            this.lblAmiiboNr.Size = new System.Drawing.Size(57, 15);
-            this.lblAmiiboNr.TabIndex = 13;
-            this.lblAmiiboNr.Text = "Statue ID:";
-            // 
-            // tbStatueId
-            // 
-            this.tbStatueId.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbStatueId.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbStatueId.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbStatueId.Location = new System.Drawing.Point(257, 38);
-            this.tbStatueId.Name = "tbStatueId";
-            this.tbStatueId.ReadOnly = true;
-            this.tbStatueId.Size = new System.Drawing.Size(228, 20);
-            this.tbStatueId.TabIndex = 14;
-            // 
-            // tbRegisterDate
-            // 
-            this.tbRegisterDate.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbRegisterDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbRegisterDate.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRegisterDate.Location = new System.Drawing.Point(17, 309);
-            this.tbRegisterDate.Name = "tbRegisterDate";
-            this.tbRegisterDate.ReadOnly = true;
-            this.tbRegisterDate.Size = new System.Drawing.Size(217, 20);
-            this.tbRegisterDate.TabIndex = 16;
-            // 
-            // label2
-            // 
-            this.label2.AutoEllipsis = true;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 291);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 15);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Register date:";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ASNC_GUI.Properties.Resources.database;
-            this.pictureBox2.InitialImage = global::ASNC_GUI.Properties.Resources.Empty;
-            this.pictureBox2.Location = new System.Drawing.Point(246, 188);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
-            // 
-            // tbDataSource
-            // 
-            this.tbDataSource.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbDataSource.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbDataSource.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataSource.Location = new System.Drawing.Point(243, 227);
-            this.tbDataSource.Name = "tbDataSource";
-            this.tbDataSource.ReadOnly = true;
-            this.tbDataSource.Size = new System.Drawing.Size(217, 20);
-            this.tbDataSource.TabIndex = 19;
-            // 
-            // label3
-            // 
-            this.label3.AutoEllipsis = true;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(240, 209);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 15);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Data from Game (TitleID):";
-            // 
-            // tbPlatform
-            // 
-            this.tbPlatform.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbPlatform.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPlatform.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPlatform.Location = new System.Drawing.Point(243, 268);
-            this.tbPlatform.Name = "tbPlatform";
-            this.tbPlatform.ReadOnly = true;
-            this.tbPlatform.Size = new System.Drawing.Size(217, 20);
-            this.tbPlatform.TabIndex = 21;
-            // 
-            // label4
-            // 
-            this.label4.AutoEllipsis = true;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(240, 250);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 15);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Platform:";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label5.Location = new System.Drawing.Point(13, 462);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 19);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Output directory:";
+            this.btnExecute.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnExecute.FlatAppearance.BorderSize = 0;
+            this.btnExecute.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnExecute.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnExecute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExecute.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExecute.Image = global::ASNC_GUI.Properties.Resources.play;
+            this.btnExecute.Location = new System.Drawing.Point(413, 415);
+            this.btnExecute.Name = "btnExecute";
+            this.btnExecute.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnExecute.Size = new System.Drawing.Size(72, 87);
+            this.btnExecute.TabIndex = 12;
+            this.btnExecute.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
-            // tbOutput
+            // amiiboImage
             // 
-            this.tbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbOutput.BackColor = System.Drawing.Color.White;
-            this.tbOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbOutput.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tbOutput.Location = new System.Drawing.Point(156, 458);
-            this.tbOutput.Name = "tbOutput";
-            this.tbOutput.Size = new System.Drawing.Size(177, 25);
-            this.tbOutput.TabIndex = 23;
+            this.amiiboImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.amiiboImage.InitialImage = global::ASNC_GUI.Properties.Resources.Empty;
+            this.amiiboImage.Location = new System.Drawing.Point(17, 12);
+            this.amiiboImage.Name = "amiiboImage";
+            this.amiiboImage.Size = new System.Drawing.Size(170, 170);
+            this.amiiboImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.amiiboImage.TabIndex = 2;
+            this.amiiboImage.TabStop = false;
             // 
-            // btnOutputSelect
+            // btnAdd
             // 
-            this.btnOutputSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOutputSelect.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnOutputSelect.FlatAppearance.BorderSize = 0;
-            this.btnOutputSelect.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.btnOutputSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnOutputSelect.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnOutputSelect.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOutputSelect.Location = new System.Drawing.Point(335, 458);
-            this.btnOutputSelect.Name = "btnOutputSelect";
-            this.btnOutputSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOutputSelect.Size = new System.Drawing.Size(47, 25);
-            this.btnOutputSelect.TabIndex = 24;
-            this.btnOutputSelect.Text = "...";
-            this.btnOutputSelect.UseVisualStyleBackColor = true;
-            this.btnOutputSelect.Click += new System.EventHandler(this.btnOutputSelect_Click);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnAdd.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Image = global::ASNC_GUI.Properties.Resources.plus;
+            this.btnAdd.Location = new System.Drawing.Point(550, 0);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAdd.Size = new System.Drawing.Size(45, 45);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // tbSerial
+            // DeleteAmiibo
             // 
-            this.tbSerial.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbSerial.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSerial.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSerial.Location = new System.Drawing.Point(257, 64);
-            this.tbSerial.Name = "tbSerial";
-            this.tbSerial.ReadOnly = true;
-            this.tbSerial.Size = new System.Drawing.Size(228, 20);
-            this.tbSerial.TabIndex = 26;
-            // 
-            // label6
-            // 
-            this.label6.AutoEllipsis = true;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(213, 68);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 15);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Serial:";
-            // 
-            // tbUID
-            // 
-            this.tbUID.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tbUID.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbUID.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUID.Location = new System.Drawing.Point(257, 90);
-            this.tbUID.Name = "tbUID";
-            this.tbUID.ReadOnly = true;
-            this.tbUID.Size = new System.Drawing.Size(228, 20);
-            this.tbUID.TabIndex = 28;
-            // 
-            // label7
-            // 
-            this.label7.AutoEllipsis = true;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(222, 94);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 15);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "UID:";
+            this.DeleteAmiibo.HeaderText = "";
+            this.DeleteAmiibo.Image = global::ASNC_GUI.Properties.Resources.garbage;
+            this.DeleteAmiibo.Name = "DeleteAmiibo";
+            this.DeleteAmiibo.ReadOnly = true;
+            this.DeleteAmiibo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DeleteAmiibo.ToolTipText = "Remove Amiibo from list";
+            this.DeleteAmiibo.Width = 32;
             // 
             // MainForm
             // 
@@ -641,12 +672,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.amiiboPanel.ResumeLayout(false);
             this.gridActionsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).EndInit();
             this.managerPanel.ResumeLayout(false);
             this.managerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amiiboImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -694,6 +725,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbSerial;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnInfo;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
     }
 }
 
