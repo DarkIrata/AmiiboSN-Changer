@@ -1,37 +1,35 @@
 # AmiiboSN-Changer
-This tool is a C# copy of AnalogMan's Python script.
-http://gbatemp.net/threads/release-amiibo-bin-serial-changer.464702/
+This tool generates a new "unique" serial and write it into a selected Amiibo dumb file.
+Thats make it possible to use the same Amiibo multiple times in a game (for example TLoZ Breath of the Wild).
 
-I don't like to install python... thats the reason for the C# Port..
+Since the console application is written in dotnet, it should be possible to use the application on other platforms.
+Currently only a portable build is provided.
 
-This tool generates a new "unique" serial and write it into the Amiibo bin file.
-Thats make it possible to use for example the same Amiibo multiple times in a game (for example TLoZ Breath of the Wild).
+Tested with N2Elite Tags and TagMo
 
 ## Installation
-You just need the key_retail.bin next to the asnc.exe
-   Google for it. I can't include it because of the copyright.
+You require a key_retail.bin (MD5 45FD53569F5765EEF9C337BD5172F937) file. Since the file is copyrighted, i cannot be provided with the tool.
+Put the key_retail.bin file into the keys directory or adjust the appsettings.json file.
 
 ## Usage - GUI
-Open it up. Its explain itself! 
+Add amiibos by clicking on the "+" Button at the top or drag&drop them into the left field.
+Adjust the required settings in the lower right and press the Start button ">".
+
+If an amiibo couldn't be decrypted while loding, the Start button will be disabled. The indicator is the lock in the grid on the left side.
+
+![](Images/asnc-gui.png)
 
 ## Usage - Console
-The asnc.exe have to be called with at least 1 parameter.
+To use the console application you require DotNet 2.1
 
-Available parameters:
-1 = Amiibo Bin Fil Path
-2 (Optional) = Amount
-3 (Optional) = Output Path
-
-Example for 3 different Mario Amiibos in my Amiibo Folder:
-   > asnc.exe "C:\Amiibos\Mario.bin" 3 "C:\Amiibos\NewUnique"
-
-## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+For the portable build, call like in this example
+```
+dotnet "D:\AmiiboSN-Changer\ASNC.dll" -a "D:\AmiiboSN-Changer\Amiibos\8BitMario.bin" -c 2 -o "D:\AmiiboSN-Changer\Amiibos\Output"
+```
 
 ## Credits
-AnalogMan - Python Version and the idea for a wrapper Tool
-socram888 - Amiitool 
+AnalogMan - Simpler Python Version and the idea for a wrapper Tool
+Falco20019 - Awesome amiibo library (libamiibo)
+
+
+Feel free to open a issue if you have problems.
