@@ -557,6 +557,7 @@
             // 
             // btnInfo
             // 
+            this.btnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInfo.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnInfo.FlatAppearance.BorderSize = 0;
             this.btnInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
@@ -666,7 +667,7 @@
             this.Controls.Add(this.Divider2);
             this.Controls.Add(this.amiiboPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(620, 460);
+            this.MinimumSize = new System.Drawing.Size(976, 502);
             this.Name = "MainForm";
             this.Text = "Amiibo SN Changer";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
