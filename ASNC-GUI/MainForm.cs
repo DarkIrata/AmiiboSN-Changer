@@ -152,6 +152,8 @@ namespace ASNC_GUI
 
                 this.CleanUpAmiiboDisplay();
 
+                this.btnExecute.Enabled = amiiboTagWrapper.AmiiboTag.IsDecrypted;
+
                 this.amiiboImage.Image = amiiboTagWrapper.GetBitmap(170, 170);
                 this.lblAmiiboName.Text = amiiboTagWrapper.Name;
 
@@ -177,6 +179,12 @@ namespace ASNC_GUI
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(this.tbOutput.Text) || !Directory.Exists(this.tbOutput.Text))
+            {
+                MessageBox.Show($"Please enter a valid output directory", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.tbOutput.ReadOnly = true;
             this.btnExecute.Enabled = false;
             this.numUpDown.ReadOnly = true;

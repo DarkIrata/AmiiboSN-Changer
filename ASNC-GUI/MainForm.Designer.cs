@@ -600,6 +600,7 @@
             // 
             this.btnExecute.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExecute.Enabled = false;
             this.btnExecute.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnExecute.FlatAppearance.BorderSize = 0;
             this.btnExecute.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
