@@ -56,9 +56,17 @@ namespace ASNC
                 var savePath = Path.Combine(output, fileName);
 
                 Console.WriteLine($">> Creating Amiibo {savePath}");
-                amiibo.RandomizeUID();
 
-                AmiiboSNHelper.EncryptNtag(savePath, amiibo);
+                amiibo.UID = AmiiboSNHelper.CustomRandomizeSerial();
+
+                if (!amiibo.IsUidValid())
+                {
+                    Console.WriteLine($">> Invalid UID for Amiibo Nr {i}");
+                }
+                else
+                {
+                    AmiiboSNHelper.EncryptNtag(savePath, amiibo);
+                }
             }
         }
     }
