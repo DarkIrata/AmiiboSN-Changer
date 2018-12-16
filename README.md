@@ -12,8 +12,8 @@ You require a key_retail.bin (MD5 45FD53569F5765EEF9C337BD5172F937) file. Since 
 Put the key_retail.bin file into the keys directory or adjust the appsettings.json file.
 
 ## Usage - GUI
-Add amiibos by clicking on the "+" Button at the top or drag&drop them into the left field.
-Adjust the required settings in the lower right and press the Start button ">".
+Add amiibos by clicking on the "![](ASNC-GUI/Resources/plus.png)" Button at the top or drag&drop them into the left field.
+Adjust the required settings in the lower right and press the Start button "![](ASNC-GUI/Resources/play.png)".
 
 If an amiibo couldn't be decrypted while loding, the Start button will be disabled. The indicator is the lock in the grid on the left side.
 
@@ -30,6 +30,4 @@ dotnet "D:\AmiiboSN-Changer\ASNC.dll" -a "D:\AmiiboSN-Changer\Amiibos\8BitMario.
 ## Credits
 AnalogMan - Simpler Python Version and the idea for a wrapper Tool
 Falco20019 - Awesome amiibo library (libamiibo)
-
-
-Feel free to open a issue if you have problems.
+smashicons - Icons
