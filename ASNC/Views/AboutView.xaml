@@ -1,0 +1,104 @@
+﻿<Window
+    x:Class="ASNC.Views.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ASNC.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title}"
+    Width="410"
+    Height="270"
+    Background="{DynamicResource BackgroundBrush}"
+    ResizeMode="NoResize"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label
+                Content="{Binding InnerTitle}"
+                FontSize="17"
+                FontWeight="SemiBold" />
+            <Label Padding="5,0,0,2" Content="Copyright 2023 - DarkIrata - GPL-3.0" />
+
+            <TextBlock>
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/DarkIrata/AmiiboSN-Changer">
+                    <Label Padding="5,0" Content="Amiibo SN Changer - Open Source" />
+                </Hyperlink>
+            </TextBlock>
+
+            <Label
+                Margin="0,10,0,0"
+                Content="Licenses"
+                FontSize="14"
+                FontWeight="SemiBold" />
+
+            <TextBlock>
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/DarkIrata/libamiibo/blob/master/LICENSE">
+                    <Label Padding="5,0" Content="MIT - libamiibo Library - Falco2019, DarkIrata" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock Margin="0,4,0,0">
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://pictogrammers.com/docs/general/license/">
+                    <Label Padding="5,0" Content="Apache 2.0 - Icons - Picogrammers" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock Margin="0,4,0,0">
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://licenses.nuget.org/BSD-3-Clause">
+                    <Label Padding="5,0" Content="BSD 3 - Ookii Dialogs WPF - Ooki" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock Margin="0,4,0,0">
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://www.bouncycastle.org/csharp/licence.html">
+                    <Label Padding="5,0" Content="MIT - Portable BouncyCastle - Claire Novotny" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock Margin="0,4,0,0">
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/rds1983/StbSharp">
+                    <Label Padding="5,0" Content="Public Domain - StbSharp - StbSharpTeam" />
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+
+            <Image
+                Width="80"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Source="pack://application:,,,/Resources/Images/Github_Light.png" />
+
+            <Button
+                Width="100"
+                Margin="0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                BorderThickness="1"
+                Command="{Binding CloseCommand}"
+                Style="{DynamicResource ErrorButton}">
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Padding="5,0,2,1"
+                        Content="Close"
+                        FontSize="15"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource OnPrimaryBrush}" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

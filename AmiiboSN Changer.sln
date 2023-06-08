@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASNC-GUI", "ASNC-GUI\ASNC-GUI.csproj", "{96CD8400-C587-4391-A6DB-C0816D03FDAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASNC", "ASNC\ASNC.csproj", "{C52DC98A-6FD0-4BD2-AF5E-DA2959507AD1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmiiboSNChanger.Libs", "AmiiboSNChanger.Libs\AmiiboSNChanger.Libs.csproj", "{755D6C16-2557-420E-9FC0-0E34A8797DC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASNC", "ASNC\ASNC.csproj", "{A854B515-933B-4E8B-887D-0CE07A2DBEDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{96CD8400-C587-4391-A6DB-C0816D03FDAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96CD8400-C587-4391-A6DB-C0816D03FDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96CD8400-C587-4391-A6DB-C0816D03FDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96CD8400-C587-4391-A6DB-C0816D03FDAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C52DC98A-6FD0-4BD2-AF5E-DA2959507AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C52DC98A-6FD0-4BD2-AF5E-DA2959507AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C52DC98A-6FD0-4BD2-AF5E-DA2959507AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C52DC98A-6FD0-4BD2-AF5E-DA2959507AD1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{755D6C16-2557-420E-9FC0-0E34A8797DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{755D6C16-2557-420E-9FC0-0E34A8797DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{755D6C16-2557-420E-9FC0-0E34A8797DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{755D6C16-2557-420E-9FC0-0E34A8797DC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A854B515-933B-4E8B-887D-0CE07A2DBEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A854B515-933B-4E8B-887D-0CE07A2DBEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A854B515-933B-4E8B-887D-0CE07A2DBEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A854B515-933B-4E8B-887D-0CE07A2DBEDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

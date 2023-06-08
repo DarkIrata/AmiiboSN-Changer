@@ -1,31 +1,52 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <Authors>Wladislaw Batt</Authors>
-    <Company>IrataProjects</Company>
-    <Copyright>Wladislaw Batt 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/DarkIrata/AmiiboSN-Changer/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-Changer</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-Changer</RepositoryUrl>
-    <RepositoryType>GIT</RepositoryType>
-    <Description>DotNet Application to help alter amiibo serial number.</Description>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <ApplicationIcon>ASNC.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PowerArgs" Version="3.5.0" />
+    <None Remove="Resources\Images\Empty_Light.png" />
+    <None Remove="Resources\Images\Github.png" />
+    <None Remove="Resources\Images\Github_Light.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AmiiboSNChanger.Libs\AmiiboSNChanger.Libs.csproj" />
+    <Content Include="ASNC.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="libamiibo">
-      <HintPath>..\External\LibAmiibo\netstandard2.0\libamiibo.dll</HintPath>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Empty.png" />
+    <Resource Include="Resources\Images\Empty_Light.png" />
+    <Resource Include="Resources\Images\Github.png" />
+    <Resource Include="Resources\Images\Github_Light.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="StbSharp" Version="0.7.2.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IPUP.MVVM">
+      <HintPath>..\External\IPUP.MVVM\net6.0\IPUP.MVVM.dll</HintPath>
+    </Reference>
+    <Reference Include="LibAmiibo">
+      <HintPath>..\External\LibAmiibo\net6.0\LibAmiibo.dll</HintPath>
     </Reference>
   </ItemGroup>
 
