@@ -9,6 +9,13 @@
     <FileVersion>3.0.0.0</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ApplicationIcon>ASNC.ico</ApplicationIcon>
+    <Authors>Wladislaw batt</Authors>
+    <Company>IrataProjects</Company>
+    <Copyright>IrataProjects 2023</Copyright>
+    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-</RepositoryUrl>
+    <AssemblyName>Amiibo SN Changer</AssemblyName>
+    <Version>$(AssemblyVersion)</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +32,7 @@
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
