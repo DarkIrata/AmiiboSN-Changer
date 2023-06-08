@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using ASNC.Data;
 using ASNC.Services;
 using ASNC.ViewModels;
@@ -28,11 +27,6 @@ namespace ASNC
             base.OnStartup(e);
             this.MainWindow = new ShellView() { DataContext = this.shellViewModel };
             this.MainWindow.Show();
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
 
             if (!Config.Exists)
             {
