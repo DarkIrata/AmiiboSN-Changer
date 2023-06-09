@@ -18,6 +18,7 @@ namespace ASNC.ViewModels
     public class AmiiboSelectorViewModel : ViewModelBase, IFileDragDropTarget
     {
         private readonly ServiceProvider serviceProvider;
+        private readonly ImageQueueService imageQueueService;
         private readonly Action<AmiiboTagSelectableViewModel?> onSelectedAmiiboChanged;
         private readonly Action onListChanged;
 
@@ -51,6 +52,7 @@ namespace ASNC.ViewModels
         public AmiiboSelectorViewModel(ServiceProvider serviceProvider, Action<AmiiboTagSelectableViewModel?> onSelectedAmiiboChanged, Action onListChanged)
         {
             this.serviceProvider = serviceProvider;
+            this.imageQueueService = new ImageQueueService(this.serviceProvider);
             this.onSelectedAmiiboChanged = onSelectedAmiiboChanged;
             this.onListChanged = onListChanged;
 
@@ -145,8 +147,6 @@ namespace ASNC.ViewModels
             return entry;
         }
 
-        // ToDo: Breaks on multiple images when the Statue Id is the same (cant overwrite a writing file)
-        // Queue with register for Image should fix this
         private async Task TryLoadImage(AmiiboTagSelectableViewModel entry)
         {
             var statueId = entry.AmiiboTag?.Amiibo?.StatueId;
@@ -155,12 +155,11 @@ namespace ASNC.ViewModels
                 entry.ImageLoading = true;
                 try
                 {
-                    var path = await this.serviceProvider.LibAmiibo.GetLocalAmiiboImage(statueId, true);
-                    if (path != null)
+                    await this.imageQueueService.TryGetImage(statueId, true, async (imageFilePath) =>
                     {
-                        var fullPath = Path.GetFullPath(path);
-                        if (File.Exists(fullPath))
+                        if (imageFilePath != null)
                         {
+                            var fullPath = Path.GetFullPath(imageFilePath);
                             var uri = new Uri(fullPath);
                             await Application.Current.Dispatcher.InvokeAsync(() =>
                             {
@@ -171,16 +170,21 @@ namespace ASNC.ViewModels
                                 catch // Since we are on the UI Thread, we need to catch this exception here
                                 {
                                 }
+                                finally
+                                {
+                                    entry.ImageLoading = false;
+                                }
                             });
                         }
-                    }
+                        else
+                        {
+                            entry.ImageLoading = false;
+                        }
+                    });
                 }
-                catch
+                catch (Exception ex)
                 {
-                }
-                finally
-                {
-                    entry.ImageLoading = false;
+                    await Console.Out.WriteLineAsync(ex.Message);
                 }
             }
         }
