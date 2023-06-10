@@ -113,7 +113,14 @@ namespace ASNC.ViewModels
         {
             if (this.SelectedAmiibo?.OriginalFileData != null)
             {
-                this.EditableTag = this.serviceProvider.LibAmiibo.DecryptTag(this.SelectedAmiibo.OriginalFileData);
+                if (this.serviceProvider.LibAmiibo?.IsAmiiboKeyProvided ?? false)
+                {
+                    this.EditableTag = this.serviceProvider!.LibAmiibo!.DecryptTag(this.SelectedAmiibo.OriginalFileData);
+                }
+                else
+                {
+                    this.EditableTag = this.serviceProvider!.LibAmiibo!.ReadEncryptedTag(this.SelectedAmiibo.OriginalFileData);
+                }
             }
             else
             {
