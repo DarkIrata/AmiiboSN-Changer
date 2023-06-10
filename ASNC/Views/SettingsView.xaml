@@ -7,10 +7,8 @@
     xmlns:local="clr-namespace:ASNC.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
-    Width="700"
-    Height="275"
-    d:DesignHeight="400"
-    d:DesignWidth="800"
+    Width="619"
+    Height="330"
     Background="{DynamicResource BackgroundBrush}"
     ResizeMode="NoResize"
     TextOptions.TextFormattingMode="Ideal"
@@ -21,50 +19,154 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
 
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <Label Content="Enter path to the Retail Key file. Without a valid key, all loaded Amiibo Tags will be in Read Only mode." />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <Label Content="Enter path to the Retail Key file. Without a valid key, all loaded Amiibo Tags will be in Read Only mode." />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                <controls:TitledTextBox Title="Retail Key Path" Text="{Binding KeyFilePath, UpdateSourceTrigger=PropertyChanged, Delay=150}" />
+                    <controls:TitledTextBox Title="Retail Key Path" Text="{Binding KeyFilePath, UpdateSourceTrigger=PropertyChanged, Delay=150}" />
 
+                    <Button
+                        Grid.Column="1"
+                        Width="45"
+                        Margin="5,0,0,0"
+                        BorderThickness="1"
+                        Command="{Binding SelectRetailKeyCommand}"
+                        Style="{DynamicResource PrimaryButton}"
+                        ToolTip="Select Retail Key">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Path
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{DynamicResource OpenFolder}"
+                                Fill="{DynamicResource TextBrush}"
+                                Stretch="Uniform" />
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Label
+                        Margin="0"
+                        Padding="4,8"
+                        Content="Selected Retail Key looks" />
+                    <Label
+                        Margin="0"
+                        Padding="0,8"
+                        Content="VALID"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource SuccessBrush}"
+                        Visibility="{Binding IsGivenKeyValid, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Label
+                        Margin="0"
+                        Padding="0,8"
+                        Content="INVALID"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource ErrorBrush}"
+                        Visibility="{Binding IsGivenKeyInvalid, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                </StackPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+
+                        <CheckBox
+                            VerticalContentAlignment="Center"
+                            Content="Download missing Amiibo images on Amiibo load"
+                            IsChecked="{Binding DownloadMissingImagesOnLoad}" />
+
+                        <CheckBox
+                            Margin="0,5,0,0"
+                            VerticalContentAlignment="Center"
+                            Content="Update Amiibo info data on start"
+                            IsChecked="{Binding DownloadInfoDataOnStart}" />
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Label
+                                Padding="0,2"
+                                Content="{Binding AmiiboImagesCount, FallbackValue=0}"
+                                FontWeight="SemiBold" />
+                            <Label Padding="4,2" Content="Amiibo local Images " />
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Label
+                                Padding="0,2"
+                                Content="{Binding AmiiboDataCount, FallbackValue=0}"
+                                FontWeight="SemiBold" />
+                            <Label Padding="4,2" Content="Amiibo ID DB Entries" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+
+            <Border
+                Grid.Row="1"
+                Height="1"
+                Margin="0,3"
+                BorderBrush="{DynamicResource Gray300Brush}"
+                BorderThickness="0,0.3,0,0" />
+
+            <StackPanel
+                Grid.Row="2"
+                Margin="0,5"
+                Orientation="Horizontal">
                 <Button
-                    Grid.Column="1"
-                    Width="45"
-                    Margin="5,0,0,0"
+                    Padding="8,0"
                     BorderThickness="1"
-                    Command="{Binding SelectRetailKeyCommand}"
-                    Style="{DynamicResource PrimaryButton}"
-                    ToolTip="Select Retail Key">
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    Command="{Binding OpenApiFolderCommand}">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
                         <Path
                             Width="20"
                             Height="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Data="{DynamicResource OpenFolder}"
-                            Fill="{DynamicResource TextBrush}"
+                            Fill="{DynamicResource OnPrimaryBrush}"
                             Stretch="Uniform" />
-                    </Grid>
+
+                        <Label
+                            Padding="4,0,2,1"
+                            Content="Open AmiiboApi Folder"
+                            FontSize="15"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource OnPrimaryBrush}" />
+                    </StackPanel>
                 </Button>
 
-                <!--<Button
-                    Grid.Column="2"
-                    Margin="0,0"
-                    Padding="8,0"
+                <Button
+                    Margin="10,0"
                     BorderThickness="1"
-                    Style="{DynamicResource SuccessButton}"
-                    ToolTip="Reload Retail Key">
+                    Command="{Binding UpdateApiDataCommand}">
                     <StackPanel
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -79,216 +181,137 @@
                             Stretch="Uniform" />
                         <Label
                             Padding="4,0,2,1"
-                            Content="Load Key"
+                            Content="Update Amiibo DB"
                             FontSize="15"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource OnPrimaryBrush}" />
                     </StackPanel>
-                </Button>-->
-            </Grid>
+                </Button>
 
-            <StackPanel Orientation="Horizontal">
-
-                <Label
-                    Margin="0"
-                    Padding="4,8"
-                    Content="Selected Retail Key looks" />
-                <Label
-                    Margin="0"
-                    Padding="0,8"
-                    Content="VALID"
-                    FontWeight="SemiBold"
-                    Foreground="{DynamicResource SuccessBrush}"
-                    Visibility="{Binding IsGivenKeyValid, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Label
-                    Margin="0"
-                    Padding="0,8"
-                    Content="INVALID"
-                    FontWeight="SemiBold"
-                    Foreground="{DynamicResource ErrorBrush}"
-                    Visibility="{Binding IsGivenKeyInvalid, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
+                <Button BorderThickness="1" Command="{Binding DownloadAllImagesCommand}">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Path
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{DynamicResource Download}"
+                            Fill="{DynamicResource OnPrimaryBrush}"
+                            Stretch="Uniform" />
+                        <Label
+                            Padding="4,0,2,1"
+                            Content="Download all Images"
+                            FontSize="15"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource OnPrimaryBrush}" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Row="3"
+                Margin="0,12,0,5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
 
-                <StackPanel>
+                <Button
+                    Width="100"
+                    Margin="12,0"
+                    BorderThickness="1"
+                    Command="{Binding CancelCommand}"
+                    Style="{DynamicResource ErrorButton}">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Path
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{DynamicResource Close}"
+                            Fill="{DynamicResource OnPrimaryBrush}"
+                            Stretch="Uniform" />
 
-                    <CheckBox
-                        VerticalContentAlignment="Center"
-                        Content="Download missing Amiibo images on Amiibo load"
-                        IsChecked="{Binding DownloadMissingImagesOnLoad}" />
-
-                    <CheckBox
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Content="Update Amiibo info data on start"
-                        IsChecked="{Binding DownloadInfoDataOnStart}" />
-
-                </StackPanel>
-
-                <StackPanel Grid.Column="2" HorizontalAlignment="Right">
-
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Label
-                            Padding="0,2"
-                            Content="{Binding AmiiboImagesCount, FallbackValue=0}"
-                            FontWeight="SemiBold" />
-                        <Label Padding="4,2" Content="Amiibo local Images " />
+                            Padding="5,0,2,1"
+                            Content="Cancel"
+                            FontSize="15"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource OnPrimaryBrush}" />
                     </StackPanel>
+                </Button>
 
-                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button
+                    Width="100"
+                    Margin="0,0"
+                    BorderThickness="1"
+                    Command="{Binding SaveCommand}"
+                    Style="{DynamicResource SuccessButton}">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Path
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{DynamicResource Save}"
+                            Fill="{DynamicResource OnPrimaryBrush}"
+                            Stretch="Uniform" />
+
                         <Label
-                            Padding="0,2"
-                            Content="{Binding AmiiboDataCount, FallbackValue=0}"
-                            FontWeight="SemiBold" />
-                        <Label Padding="4,2" Content="Amiibo ID DB Entries" />
+                            Padding="5,0,2,1"
+                            Content="Save"
+                            FontSize="15"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource OnPrimaryBrush}" />
                     </StackPanel>
+                </Button>
 
-                </StackPanel>
-            </Grid>
+            </StackPanel>
+        </Grid>
 
-        </StackPanel>
 
-        <Border
-            Grid.Row="1"
-            Height="1"
-            Margin="0,3"
-            BorderBrush="{DynamicResource Gray300Brush}"
-            BorderThickness="0,0.3,0,0" />
+        <Grid Background="#90000000" Visibility="{Binding Working, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Grid Width="70" Height="70">
+                    <Grid.RenderTransform>
+                        <RotateTransform CenterX="35" CenterY="35" />
+                    </Grid.RenderTransform>
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Grid.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        RepeatBehavior="Forever"
+                                        Storyboard.TargetProperty="RenderTransform.Angle"
+                                        To="360"
+                                        Duration="0:0:2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
 
-        <StackPanel
-            Grid.Row="2"
-            Margin="0,5"
-            Orientation="Horizontal">
-            <Button
-                Margin="0,0,5,0"
-                Padding="8,0"
-                BorderThickness="1"
-                Command="{Binding OpenApiFolderCommand}">
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
                     <Path
-                        Width="20"
-                        Height="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{DynamicResource OpenFolder}"
-                        Fill="{DynamicResource OnPrimaryBrush}"
+                        Width="60"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Data="{DynamicResource Loading}"
+                        Fill="{DynamicResource PrimaryBrush}"
                         Stretch="Uniform" />
+                </Grid>
 
-                    <Label
-                        Padding="4,0,2,1"
-                        Content="Open AmiiboApi Folder"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource OnPrimaryBrush}" />
-                </StackPanel>
-            </Button>
+                <Label Content="Working..." FontWeight="SemiBold" FontSize="19" HorizontalAlignment="Center" Margin="0,2"/>
 
-            <Button
-                Margin="10,0"
-                Padding="8,0"
-                BorderThickness="1"
-                Command="{Binding UpdateApiDataCommand}">
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Path
-                        Width="20"
-                        Height="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{DynamicResource Reload}"
-                        Fill="{DynamicResource OnPrimaryBrush}"
-                        Stretch="Uniform" />
-                    <Label
-                        Padding="4,0,2,1"
-                        Content="Update Amiibo DB"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource OnPrimaryBrush}" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                Margin="5,0"
-                Command="{Binding DownloadAllImagesCommand}"
-                Content="Download all missing Images"
-                IsEnabled="false"
-                Visibility="Collapsed" />
-        </StackPanel>
-
-        <StackPanel
-            Grid.Row="2"
-            Margin="0,5"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal">
-
-            <Button
-                Width="100"
-                Margin="12,0"
-                BorderThickness="1"
-                Command="{Binding CancelCommand}"
-                Style="{DynamicResource ErrorButton}">
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Path
-                        Width="20"
-                        Height="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{DynamicResource Close}"
-                        Fill="{DynamicResource OnPrimaryBrush}"
-                        Stretch="Uniform" />
-
-                    <Label
-                        Padding="5,0,2,1"
-                        Content="Cancel"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource OnPrimaryBrush}" />
-                </StackPanel>
-            </Button>
-
-            <Button
-                Width="100"
-                Margin="0,0"
-                BorderThickness="1"
-                Command="{Binding SaveCommand}"
-                Style="{DynamicResource SuccessButton}">
-                <StackPanel
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Path
-                        Width="20"
-                        Height="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{DynamicResource Save}"
-                        Fill="{DynamicResource OnPrimaryBrush}"
-                        Stretch="Uniform" />
-
-                    <Label
-                        Padding="5,0,2,1"
-                        Content="Save"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource OnPrimaryBrush}" />
-                </StackPanel>
-            </Button>
-
-        </StackPanel>
+                <Label Content="{Binding WorkingSubText}" Background="#BC000000" HorizontalAlignment="Center" Padding="10"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ASNC.Services;
 using IPUP.MVVM.Commands;
@@ -18,7 +19,6 @@ namespace ASNC.ViewModels
         private readonly Action close;
         private AmiiboApiData? apiData;
         private LibAmiibo.LibAmiibo? testAmiibo;
-        private bool blockButtons = false;
 
         public string Title => "Amiibo SN Changer - Settings";
 
@@ -59,6 +59,22 @@ namespace ASNC.ViewModels
             set => this.Set(ref this.downloadInfoDataOnStart, value, nameof(this.DownloadInfoDataOnStart));
         }
 
+        private bool working;
+
+        public bool Working
+        {
+            get => this.working;
+            set => this.Set(ref this.working, value, nameof(this.Working));
+        }
+
+        private string workingSubText = string.Empty;
+
+        public string WorkingSubText
+        {
+            get => this.workingSubText;
+            set => this.Set(ref this.workingSubText, value, nameof(this.WorkingSubText));
+        }
+
         public bool IsGivenKeyValid => this.testAmiibo?.IsAmiiboKeyProvided ?? false;
 
         public bool IsGivenKeyInvalid => !this.IsGivenKeyValid;
@@ -93,16 +109,16 @@ namespace ASNC.ViewModels
             this.NotifyPropertyChanged(nameof(this.AmiiboImagesCount));
             Task.Run(async () =>
             {
-                this.apiData = await this.serviceProvider.LibAmiibo.GetAmiiboApiData();
+                this.apiData = await this.serviceProvider.LibAmiibo.GetAmiiboApiDataAsync();
                 this.NotifyPropertyChanged(nameof(this.AmiiboDataCount));
             });
 
             this.SelectRetailKeyCommand = new DelegateCommand(() => this.ExecuteSelectRetailKey());
-            this.OpenApiFolderCommand = new DelegateCommand(() => this.ExecuteOpenApiFolder(), () => !this.blockButtons);
-            this.UpdateApiDataCommand = new DelegateCommand(() => this.ExecuteUpdateApiData(), () => !this.blockButtons);
+            this.OpenApiFolderCommand = new DelegateCommand(() => this.ExecuteOpenApiFolder(), () => !this.Working);
+            this.UpdateApiDataCommand = new DelegateCommand(() => this.ExecuteUpdateApiData(), () => !this.Working);
             this.DownloadAllImagesCommand = new DelegateCommand(() => this.ExecuteDownloadAllImages());
-            this.CancelCommand = new DelegateCommand(() => this.ExecuteCancel(), () => !this.blockButtons);
-            this.SaveCommand = new DelegateCommand(() => this.ExecuteSave(), () => !this.blockButtons);
+            this.CancelCommand = new DelegateCommand(() => this.ExecuteCancel(), () => !this.Working);
+            this.SaveCommand = new DelegateCommand(() => this.ExecuteSave(), () => !this.Working);
         }
 
         private void RaiseCommands()
@@ -130,31 +146,58 @@ namespace ASNC.ViewModels
             this.close?.Invoke();
         }
 
-        private void ExecuteDownloadAllImages()
+        private async void ExecuteDownloadAllImages()
         {
-            throw new NotImplementedException();
+            if (MessageBox.Show(
+                "Are you sure, you want to download all Amiibo Images?",
+                "Download images",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                this.Working = true;
+                this.WorkingSubText = "Downloading images";
+                try
+                {
+                    await this.serviceProvider.LibAmiibo.UpdateMissingLocalAmiiboImages();
+                    await Task.Delay(2000);
+                    this.WorkingSubText = "Try ensure images";
+                    await this.serviceProvider.LibAmiibo.UpdateMissingLocalAmiiboImages();
+                    this.WorkingSubText = "Finishing";
+                    await Task.Delay(1000);
+                }
+                catch
+                {
+                    this.WorkingSubText = "Something went wrong. Please try again..";
+                    await Task.Delay(2000);
+                }
+                this.NotifyPropertyChanged(nameof(this.AmiiboImagesCount));
+                this.Working = false;
+            }
         }
 
         private async void ExecuteUpdateApiData()
         {
-            this.blockButtons = true;
+            this.Working = true;
             this.RaiseCommands();
-
+            this.WorkingSubText = "Downloading json";
             await this.serviceProvider.LibAmiibo.UpdateLocalAmiiboData();
+            this.WorkingSubText = "Refreshing Data";
             await this.serviceProvider.LibAmiibo.RefreshInfoDataProvider();
-            this.apiData = await this.serviceProvider.LibAmiibo.GetAmiiboApiData();
+            this.WorkingSubText = "Getting Data";
+            this.apiData = await this.serviceProvider.LibAmiibo.GetAmiiboApiDataAsync();
 
+            this.WorkingSubText = string.Empty;
             this.NotifyPropertyChanged(nameof(this.AmiiboDataCount));
-            this.blockButtons = false;
+            this.Working = false;
             this.RaiseCommands();
         }
 
         private void ExecuteOpenApiFolder()
         {
-            this.blockButtons = true;
+            this.Working = true;
             this.RaiseCommands();
             Process.Start("explorer.exe", Path.GetFullPath("./AmiiboApi"));
-            this.blockButtons = false;
+            this.Working = false;
             this.RaiseCommands();
         }
 
