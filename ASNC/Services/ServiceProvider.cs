@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Media.Imaging;
 using ASNC.Data;
 
@@ -22,7 +23,15 @@ namespace ASNC.Services
 
         private void ReinitializeLibAmiibo()
         {
-            this.LibAmiibo = new LibAmiibo.LibAmiibo(this.Config.RetailKeyPath);
+            if (File.Exists(this.Config?.RetailKeyPath))
+            {
+                this.LibAmiibo = new LibAmiibo.LibAmiibo(this.Config!.RetailKeyPath);
+            }
+            else
+            {
+                this.LibAmiibo = new LibAmiibo.LibAmiibo();
+            }
+
             this.LibAmiibo.RefreshInfoDataProvider();
         }
     }
