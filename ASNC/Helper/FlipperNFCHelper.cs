@@ -20,10 +20,17 @@ namespace ASNC.Helper
                 throw new ArgumentException($"Given bin data is less than '{NfcLength}' Bytes");
             }
 
-            var x = Regex.Replace(Convert.ToHexString(encryptedBin), ".{8}", $"$0 {Environment.NewLine}");
+            var uidBytes = new byte[]
+            {
+                encryptedBin[0],
+                encryptedBin[1],
+                encryptedBin[2],
+                encryptedBin[4],
+                encryptedBin[5],
+                encryptedBin[6],
+                encryptedBin[7],
+            };
 
-            const int uidLength = 0x08;
-            var uidBytes = encryptedBin.Slice(0, uidLength);
             var uid = Regex.Replace(Convert.ToHexString(uidBytes), ".{2}", "$0 ").Trim();
             var zeroedSignature = string.Concat(Enumerable.Repeat("00 ", 32)).Trim();
 
