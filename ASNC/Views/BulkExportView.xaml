@@ -44,7 +44,7 @@
             <Button
                 Grid.Column="1"
                 Width="45"
-                Margin="5,0,0,0"
+                Margin="3,0,0,0"
                 BorderThickness="1"
                 Command="{Binding SelectOutputPathCommand}"
                 Style="{DynamicResource PrimaryButton}"
@@ -72,66 +72,80 @@
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <controls:TitledTextBox
-                Title="Amount to generate"
-                IsReadOnly="True"
-                Text="{Binding Amount, Mode=OneWay}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel
+                <controls:TitledTextBox
+                    Title="Amount to generate"
+                    IsReadOnly="True"
+                    Text="{Binding Amount, Mode=OneWay}" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="3,0,0,0"
+                    VerticalAlignment="Center">
+                    <Button
+                        Width="45"
+                        Height="20"
+                        Padding="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        BorderThickness="1"
+                        Command="{Binding AmountUpCommand}"
+                        Style="{DynamicResource PrimaryButton}">
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Path
+                                Width="10"
+                                Height="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{DynamicResource ChevronUp}"
+                                Fill="{DynamicResource OnPrimaryBrush}"
+                                Stretch="Uniform" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Width="45"
+                        Height="20"
+                        Padding="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        BorderThickness="1"
+                        Command="{Binding AmountDownCommand}"
+                        Style="{DynamicResource PrimaryButton}">
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Path
+                                Width="10"
+                                Height="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{DynamicResource ChevronDown}"
+                                Fill="{DynamicResource OnPrimaryBrush}"
+                                Stretch="Uniform" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <controls:TitledComboBox
+                Title="Filetype"
                 Grid.Column="1"
-                Margin="5,0,0,0"
-                VerticalAlignment="Center">
-                <Button
-                    Width="45"
-                    Height="20"
-                    Padding="0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    BorderThickness="1"
-                    Command="{Binding AmountUpCommand}"
-                    Style="{DynamicResource PrimaryButton}">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Path
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Data="{DynamicResource ChevronUp}"
-                            Fill="{DynamicResource OnPrimaryBrush}"
-                            Stretch="Uniform" />
-                    </StackPanel>
-                </Button>
-
-                <Button
-                    Width="45"
-                    Height="20"
-                    Padding="0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    BorderThickness="1"
-                    Command="{Binding AmountDownCommand}"
-                    Style="{DynamicResource PrimaryButton}">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Path
-                            Width="10"
-                            Height="10"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Data="{DynamicResource ChevronDown}"
-                            Fill="{DynamicResource OnPrimaryBrush}"
-                            Stretch="Uniform" />
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                Margin="10,0,0,0"
+                ItemsSource="{Binding ExportTargetTypes}"
+                SelectedIndex="{Binding SelectedExportTargetType}" />
         </Grid>
 
         <Border

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
+using ASNC.Helper;
 using ASNC.Services;
 using IPUP.MVVM.Commands;
 using IPUP.MVVM.ViewModels;
@@ -37,6 +40,16 @@ namespace ASNC.ViewModels
             set => this.Set(ref this.amount, value, nameof(this.Amount));
         }
 
+        public string[] ExportTargetTypes => this.TargetFilestypes.Values.ToArray();
+
+        private int selectedExportTargetType;
+
+        public int SelectedExportTargetType
+        {
+            get => this.selectedExportTargetType;
+            set => this.Set(ref this.selectedExportTargetType, value, nameof(this.SelectedExportTargetType));
+        }
+
         public ICommand AmountUpCommand { get; set; }
 
         public ICommand AmountDownCommand { get; set; }
@@ -49,11 +62,26 @@ namespace ASNC.ViewModels
 
         public bool? DialogResult { get; private set; } = null;
 
-        public BulkExportViewModel(ServiceProvider serviceProvider, Action close, AmiiboTagSelectableViewModel[]? tags)
+        private Dictionary<string, string> TargetFilestypes = new Dictionary<string, string>()
+        {
+            { ".bin", ".bin Binary" },
+            { FlipperNFCHelper.Filetype, ".nfc Flipper NFC" },
+        };
+
+        public BulkExportViewModel(ServiceProvider serviceProvider, Action close, AmiiboTagSelectableViewModel[]? tags, int? lastSelectedExportTargetType = null)
         {
             this.serviceProvider = serviceProvider;
             this.close = close;
             this.tags = tags;
+
+            if (lastSelectedExportTargetType != null)
+            {
+                this.SelectedExportTargetType = lastSelectedExportTargetType.Value;
+            }
+            else
+            {
+                this.SelectedExportTargetType = 0;
+            }
 
             this.AmountUpCommand = new DelegateCommand(() => this.AdjustAmount(1));
             this.AmountDownCommand = new DelegateCommand(() => this.AdjustAmount(-1));
@@ -72,6 +100,7 @@ namespace ASNC.ViewModels
                 return;
             }
 
+            var targetFiletype = this.TargetFilestypes.ElementAt(this.SelectedExportTargetType).Key;
             foreach (var singleTag in this.tags)
             {
                 var fileName = Path.GetFileNameWithoutExtension(singleTag.FilePath);
@@ -79,15 +108,24 @@ namespace ASNC.ViewModels
                 for (int i = 0; i < this.Amount; i++)
                 {
                     baseTag.RandomizeUID();
-
-                    var newFileName = $"{fileName}_asnc_{i}.bin";
+                    var newFileName = $"{fileName}_asnc_{i}{targetFiletype}";
                     var path = Path.Combine(this.OutputPath!, newFileName);
                     var encryptedTag = this.serviceProvider.LibAmiibo.EncryptTag(singleTag.AmiiboTag);
-                    File.WriteAllBytes(path, encryptedTag);
+
+                    if (path.EndsWith(FlipperNFCHelper.Filetype))
+                    {
+                        var nfcData = FlipperNFCHelper.ToNfc(encryptedTag);
+                        File.WriteAllText(path, nfcData);
+                    }
+                    else
+                    {
+                        File.WriteAllBytes(path, encryptedTag);
+                    }
                 }
             }
 
-            Process.Start("explorer.exe", this.OutputPath!);
+            var explorer = Process.Start("explorer.exe", this.OutputPath!);
+            explorer.WaitForExit(1000);
 
             this.DialogResult = true;
             this.serviceProvider.Config.Save();

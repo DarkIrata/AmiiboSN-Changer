@@ -25,6 +25,8 @@ namespace ASNC.ViewModels
 
         public DelegateCommand OpenBulkExportCommand { get; }
 
+        private int? lastSelectedExportTargetType = null;
+
         public ShellViewModel(ServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -60,8 +62,12 @@ namespace ASNC.ViewModels
                 Owner = Application.Current.MainWindow,
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner
             };
-            view.DataContext = new BulkExportViewModel(this.serviceProvider, view.Close, this.SelectorVM.AmiiboTags.ToArray());
+            view.DataContext = new BulkExportViewModel(this.serviceProvider, view.Close, this.SelectorVM.AmiiboTags.ToArray(), this.lastSelectedExportTargetType);
             view.ShowDialog();
+            if (view.DataContext is BulkExportViewModel vm && vm.DialogResult == true)
+            {
+                this.lastSelectedExportTargetType = vm.SelectedExportTargetType;
+            }
         }
 
         private void ExecuteOpenSettings()
