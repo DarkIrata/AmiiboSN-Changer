@@ -142,7 +142,7 @@ namespace ASNC.ViewModels
         {
             var dialog = new SaveFileDialog()
             {
-                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.FileType})|*{FlipperNFCHelper.FileType}|All files (*.*)|*.*",
+                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.Filetype})|*{FlipperNFCHelper.Filetype}|All files (*.*)|*.*",
                 FilterIndex = this.lastSelectedExportFilter,
                 InitialDirectory = Path.GetDirectoryName(this.SelectedAmiibo?.FilePath),
             };
@@ -152,7 +152,7 @@ namespace ASNC.ViewModels
                 this.lastSelectedExportFilter = dialog.FilterIndex;
                 var newTag = this.serviceProvider.LibAmiibo.EncryptTag(this.EditableTag);
 
-                if (dialog.FileName.EndsWith(FlipperNFCHelper.FileType))
+                if (dialog.FileName.EndsWith(FlipperNFCHelper.Filetype))
                 {
                     var nfcData = FlipperNFCHelper.ToNfc(newTag);
                     File.WriteAllText(dialog.FileName, nfcData);

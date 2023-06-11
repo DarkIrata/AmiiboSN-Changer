@@ -74,7 +74,7 @@ namespace ASNC.ViewModels
         {
             var dialog = new OpenFileDialog
             {
-                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.FileType})|*{FlipperNFCHelper.FileType}|All files (*.*)|*.*",
+                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.Filetype})|*{FlipperNFCHelper.Filetype}|All files (*.*)|*.*",
                 InitialDirectory = Assembly.GetExecutingAssembly().Location,
                 Multiselect = true
             };
@@ -141,7 +141,7 @@ namespace ASNC.ViewModels
 
         private byte[] GetBytesFromFile(string filePath)
         {
-            if (filePath.EndsWith(FlipperNFCHelper.FileType))
+            if (filePath.EndsWith(FlipperNFCHelper.Filetype))
             {
                 var nfcData = File.ReadAllText(filePath);
                 return FlipperNFCHelper.ToBin(nfcData);

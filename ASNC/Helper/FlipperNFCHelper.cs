@@ -11,7 +11,7 @@ namespace ASNC.Helper
         private const int PageDataLength = 0x04;
         private const int NfcLength = 0x21C;
 
-        public const string FileType = ".nfc";
+        public const string Filetype = ".nfc";
 
         public static string ToNfc(ReadOnlySpan<byte> encryptedBin)
         {
