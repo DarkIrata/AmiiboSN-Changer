@@ -201,5 +201,13 @@ namespace ASNC.ViewModels
                 }
             }
         }
+
+        public void RefreshAllEntries()
+        {
+            foreach (var item in this.AmiiboTags)
+            {
+                item.Refresh();
+            }
+        }
     }
 }

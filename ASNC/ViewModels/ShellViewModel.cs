@@ -79,6 +79,10 @@ namespace ASNC.ViewModels
             };
             view.DataContext = new SettingsViewModel(this.serviceProvider, view.Close);
             view.ShowDialog();
+            if (view.DataContext is SettingsViewModel vm)
+            {
+                this.SelectorVM.RefreshAllEntries();
+            }
         }
     }
 }

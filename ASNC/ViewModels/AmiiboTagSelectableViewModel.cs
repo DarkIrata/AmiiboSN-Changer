@@ -77,5 +77,10 @@ namespace ASNC.ViewModels
                 this.removeTag(this);
             }
         }
+
+        public void Refresh()
+        {
+            this.NotifyAllPropertyChanged();
+        }
     }
 }
