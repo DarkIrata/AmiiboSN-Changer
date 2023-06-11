@@ -108,8 +108,8 @@ namespace ASNC.ViewModels
             AmiiboTagSelectableViewModel? entry = null;
             try
             {
-                byte[] bytes = this.GetBytesFromFile(filePath);
-                AmiiboTag tag = this.GetAmiiboTagFromBytes(bytes);
+                var bytes = this.GetBytesFromFile(filePath);
+                var tag = this.GetAmiiboTagFromBytes(bytes);
                 entry = new AmiiboTagSelectableViewModel(tag, this.serviceProvider.EmptyImage, filePath, bytes, this.RemoveTag);
             }
             catch (Exception ex)
