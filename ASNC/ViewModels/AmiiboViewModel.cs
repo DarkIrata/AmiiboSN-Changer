@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using ASNC.Helper;
 using ASNC.Services;
 using IPUP.MVVM.Commands;
 using IPUP.MVVM.ViewModels;
@@ -92,6 +93,8 @@ namespace ASNC.ViewModels
 
         public DelegateCommand ExportTagCommand { get; }
 
+        private int lastSelectedExportFilter = 0;
+
         public AmiiboViewModel(ServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -139,14 +142,25 @@ namespace ASNC.ViewModels
         {
             var dialog = new SaveFileDialog()
             {
-                Filter = "Amiibo Tag bin file (*.bin)|*.bin|All files (*.*)|*.*",
+                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.FileType})|*{FlipperNFCHelper.FileType}|All files (*.*)|*.*",
+                FilterIndex = this.lastSelectedExportFilter,
                 InitialDirectory = Path.GetDirectoryName(this.SelectedAmiibo?.FilePath),
             };
 
             if (dialog.ShowDialog() == true)
             {
+                this.lastSelectedExportFilter = dialog.FilterIndex;
                 var newTag = this.serviceProvider.LibAmiibo.EncryptTag(this.EditableTag);
-                File.WriteAllBytes(dialog.FileName, newTag);
+
+                if (dialog.FileName.EndsWith(FlipperNFCHelper.FileType))
+                {
+                    var nfcData = FlipperNFCHelper.ToNfc(newTag);
+                    File.WriteAllText(dialog.FileName, nfcData);
+                }
+                else
+                {
+                    File.WriteAllBytes(dialog.FileName, newTag);
+                }
             }
         }
 
