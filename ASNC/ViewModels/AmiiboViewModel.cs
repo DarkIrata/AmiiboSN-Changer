@@ -167,8 +167,6 @@ namespace ASNC.ViewModels
             this.ExecuteReloadTag();
         }
 
-        private byte[]? GetModifiedTag() => this.EditableTag != null ? this.serviceProvider.LibAmiibo.EncryptTag(this.EditableTag) : null;
-
         private T TryGetFromUserData<T>(T data, T fallback)
         {
             if (this.HasUserData)
