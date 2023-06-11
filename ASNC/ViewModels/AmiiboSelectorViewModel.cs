@@ -146,10 +146,8 @@ namespace ASNC.ViewModels
                 var nfcData = File.ReadAllText(filePath);
                 return FlipperNFCHelper.ToBin(nfcData);
             }
-            else
-            {
-                return File.ReadAllBytes(filePath);
-            }
+
+            return File.ReadAllBytes(filePath);
         }
 
         private AmiiboTag GetAmiiboTagFromBytes(byte[] bytes)
@@ -158,10 +156,8 @@ namespace ASNC.ViewModels
             {
                 return this.serviceProvider.LibAmiibo.DecryptTag(bytes);
             }
-            else
-            {
-                return this.serviceProvider.LibAmiibo.ReadEncryptedTag(bytes);
-            }
+
+            return this.serviceProvider.LibAmiibo.ReadEncryptedTag(bytes);
         }
 
         private async Task TryLoadImage(AmiiboTagSelectableViewModel entry)
