@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ASNC.Controls;
+using ASNC.Helper;
 using ASNC.Services;
 using IPUP.MVVM.Commands;
 using IPUP.MVVM.ViewModels;
@@ -73,7 +74,7 @@ namespace ASNC.ViewModels
         {
             var dialog = new OpenFileDialog
             {
-                Filter = "Amiibo Tag bin file (*.bin)|*.bin|All files (*.*)|*.*",
+                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.FileType})|*{FlipperNFCHelper.FileType}|All files (*.*)|*.*",
                 InitialDirectory = Assembly.GetExecutingAssembly().Location,
                 Multiselect = true
             };
@@ -107,17 +108,8 @@ namespace ASNC.ViewModels
             AmiiboTagSelectableViewModel? entry = null;
             try
             {
-                var bytes = File.ReadAllBytes(filePath);
-                AmiiboTag tag;
-                if (this.serviceProvider.LibAmiibo.IsAmiiboKeyProvided)
-                {
-                    tag = this.serviceProvider.LibAmiibo.DecryptTag(bytes);
-                }
-                else
-                {
-                    tag = this.serviceProvider.LibAmiibo.ReadEncryptedTag(bytes);
-                }
-
+                byte[] bytes = this.GetBytesFromFile(filePath);
+                AmiiboTag tag = this.GetAmiiboTagFromBytes(bytes);
                 entry = new AmiiboTagSelectableViewModel(tag, this.serviceProvider.EmptyImage, filePath, bytes, this.RemoveTag);
             }
             catch (Exception ex)
@@ -145,6 +137,31 @@ namespace ASNC.ViewModels
             }
 
             return entry;
+        }
+
+        private byte[] GetBytesFromFile(string filePath)
+        {
+            if (filePath.EndsWith(FlipperNFCHelper.FileType))
+            {
+                var nfcData = File.ReadAllText(filePath);
+                return FlipperNFCHelper.ToBin(nfcData);
+            }
+            else
+            {
+                return File.ReadAllBytes(filePath);
+            }
+        }
+
+        private AmiiboTag GetAmiiboTagFromBytes(byte[] bytes)
+        {
+            if (this.serviceProvider.LibAmiibo.IsAmiiboKeyProvided)
+            {
+                return this.serviceProvider.LibAmiibo.DecryptTag(bytes);
+            }
+            else
+            {
+                return this.serviceProvider.LibAmiibo.ReadEncryptedTag(bytes);
+            }
         }
 
         private async Task TryLoadImage(AmiiboTagSelectableViewModel entry)
