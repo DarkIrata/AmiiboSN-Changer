@@ -17,7 +17,9 @@
             Margin="0,-3,0,0"
             Padding="5,5,5,0"
             VerticalAlignment="Top"
+            Content="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"
             FontSize="11"
+            IsHitTestVisible="False"
             RenderOptions.BitmapScalingMode="HighQuality" />
 
         <TextBox
@@ -26,6 +28,7 @@
             Padding="3,6,3,4"
             Background="Transparent"
             FontSize="15"
+            IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource AncestorType=UserControl}}"
             Text="{Binding Text, UpdateSourceTrigger=PropertyChanged, Delay=100, RelativeSource={RelativeSource AncestorType=UserControl}}" />
 
         <Border
