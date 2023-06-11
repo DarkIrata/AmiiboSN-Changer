@@ -32,7 +32,6 @@
             x:Name="LowerBorder"
             BorderBrush="{DynamicResource PrimaryVariantBrush}"
             BorderThickness="0,0,0,2"
-            CornerRadius="1"
             Opacity="1" />
     </Grid>
 </UserControl>
