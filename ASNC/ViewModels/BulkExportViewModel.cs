@@ -32,12 +32,21 @@ namespace ASNC.ViewModels
             }
         }
 
-        private int amount = 1;
+        private ushort numericAmount = 1;
 
-        public int Amount
+        public string Amount
         {
-            get => this.amount;
-            set => this.Set(ref this.amount, value, nameof(this.Amount));
+            get => this.numericAmount.ToString();
+            set
+            {
+                var maxValue = ushort.MaxValue;
+                var adjustedValue = InputHelper.GetRangedNumericInput(value, maxValue.ToString().Length, 1, maxValue);
+                if (adjustedValue.IsNumber)
+                {
+                    this.numericAmount = (ushort)adjustedValue.Result;
+                    this.NotifyPropertyChanged(nameof(this.Amount));
+                }
+            }
         }
 
         public string[] ExportTargetTypes => this.TargetFilestypes.Values.ToArray();
@@ -90,7 +99,7 @@ namespace ASNC.ViewModels
             this.ExportCommand = new DelegateCommand(() => this.ExecuteExport(), () => !string.IsNullOrEmpty(this.OutputPath));
         }
 
-        private void AdjustAmount(int value) => this.Amount = Math.Clamp(this.Amount + value, 1, 1000);
+        private void AdjustAmount(int value) => this.Amount = (this.numericAmount + value).ToString();
 
         private void ExecuteExport()
         {

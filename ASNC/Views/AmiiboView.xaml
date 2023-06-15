@@ -198,8 +198,7 @@
 
                         <controls:TitledTextBox
                             Title="Write Counter"
-                            IsReadOnly="True"
-                            Text="{Binding WriteCounter, Mode=OneWay}" />
+                            Text="{Binding WriteCounter}" />
 
                         <StackPanel
                             Grid.Column="1"

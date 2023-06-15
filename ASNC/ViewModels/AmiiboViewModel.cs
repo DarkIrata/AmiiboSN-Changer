@@ -73,7 +73,25 @@ namespace ASNC.ViewModels
             }
         }
 
-        public ushort? WriteCounter => this.IsDecrypted ? this.EditableTag?.Settings?.WriteCounter ?? 0 : null;
+        public ushort? TagWriteCounter => this.IsDecrypted ? this.EditableTag?.Settings?.WriteCounter ?? 0 : null;
+
+        public string? WriteCounter
+        {
+            get => this.TagWriteCounter?.ToString();
+            set
+            {
+                if (this.IsDecrypted && value != null)
+                {
+                    var maxValue = ushort.MaxValue;
+                    var adjustedValue = InputHelper.GetRangedNumericInput(value, maxValue.ToString().Length, 0, maxValue - 1);
+                    if (adjustedValue.IsNumber)
+                    {
+                        this.EditableTag!.Settings.WriteCounter = (ushort)adjustedValue.Result;
+                        this.NotifyPropertyChanged(nameof(this.WriteCounter));
+                    }
+                }
+            }
+        }
 
         public string RegistrationDate => this.GetSetupDate();
 
@@ -168,10 +186,7 @@ namespace ASNC.ViewModels
         {
             if (this.IsDecrypted && this.EditableTag?.Settings != null)
             {
-                var newValue = (this.WriteCounter.HasValue ? this.WriteCounter.Value : 0) + value;
-                newValue = Math.Clamp(newValue, 0, 65534);
-                this.EditableTag!.Settings!.WriteCounter = (ushort)newValue;
-                this.NotifyPropertyChanged(nameof(this.WriteCounter));
+                this.WriteCounter = (this.TagWriteCounter + value).ToString();
             }
         }
 

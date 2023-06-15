@@ -81,10 +81,7 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <controls:TitledTextBox
-                    Title="Amount to generate"
-                    IsReadOnly="True"
-                    Text="{Binding Amount, Mode=OneWay}" />
+                <controls:TitledTextBox Title="Amount to generate" Text="{Binding Amount}" />
 
                 <StackPanel
                     Grid.Column="1"
