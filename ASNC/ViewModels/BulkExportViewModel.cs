@@ -16,7 +16,6 @@ namespace ASNC.ViewModels
     {
         private readonly ServiceProvider serviceProvider;
         private readonly Action close;
-        private readonly AmiiboTagSelectableViewModel[]? tags;
 
         public string Title => "Amiibo SN Changer - Bulk Export";
 
@@ -86,6 +85,8 @@ namespace ASNC.ViewModels
         public DelegateCommand ExportCommand { get; set; }
 
         public bool? DialogResult { get; private set; } = null;
+
+        private AmiiboTagSelectableViewModel[]? tags;
 
         private Dictionary<string, string> TargetFilestypes = new Dictionary<string, string>()
         {
@@ -181,8 +182,9 @@ namespace ASNC.ViewModels
             }
         }
 
-        internal void ResetDialog()
+        internal void ResetData(AmiiboTagSelectableViewModel[]? tags)
         {
+            this.tags = tags;
             this.DialogResult = null;
         }
     }

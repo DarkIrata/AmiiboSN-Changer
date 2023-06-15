@@ -59,7 +59,7 @@ namespace ASNC.ViewModels
                 this.bulkExportView.DataContext = new BulkExportViewModel(this.serviceProvider, this.bulkExportView.Hide, this.SelectorVM.AmiiboTags.ToArray());
             }
 
-            (this.bulkExportView.DataContext as BulkExportViewModel)?.ResetDialog();
+            (this.bulkExportView.DataContext as BulkExportViewModel)?.ResetData(this.SelectorVM.AmiiboTags.ToArray());
             this.bulkExportView.ShowDialog();
         }
 
