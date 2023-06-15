@@ -25,7 +25,7 @@ namespace ASNC.ViewModels
 
         public DelegateCommand OpenBulkExportCommand { get; }
 
-        private int? lastSelectedExportTargetType = null;
+        private BulkExportView? bulkExportView;
 
         public ShellViewModel(ServiceProvider serviceProvider)
         {
@@ -46,43 +46,42 @@ namespace ASNC.ViewModels
 
         private void ExecuteOpenAbout()
         {
-            var view = new AboutView
-            {
-                Owner = Application.Current.MainWindow,
-                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner
-            };
+            var view = this.SetupView<AboutView>();
             view.DataContext = new AboutViewModel(view.Close);
             view.ShowDialog();
         }
 
         private void ExecuteOpenBulkExport()
         {
-            var view = new BulkExportView
+            if (this.bulkExportView == null)
             {
-                Owner = Application.Current.MainWindow,
-                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner
-            };
-            view.DataContext = new BulkExportViewModel(this.serviceProvider, view.Close, this.SelectorVM.AmiiboTags.ToArray(), this.lastSelectedExportTargetType);
-            view.ShowDialog();
-            if (view.DataContext is BulkExportViewModel vm && vm.DialogResult == true)
-            {
-                this.lastSelectedExportTargetType = vm.SelectedExportTargetType;
+                this.bulkExportView = this.SetupView<BulkExportView>();
+                this.bulkExportView.DataContext = new BulkExportViewModel(this.serviceProvider, this.bulkExportView.Hide, this.SelectorVM.AmiiboTags.ToArray());
             }
+
+            (this.bulkExportView.DataContext as BulkExportViewModel)?.ResetDialog();
+            this.bulkExportView.ShowDialog();
         }
 
         private void ExecuteOpenSettings()
         {
-            var view = new SettingsView
-            {
-                Owner = Application.Current.MainWindow,
-                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner
-            };
+            var view = this.SetupView<SettingsView>();
             view.DataContext = new SettingsViewModel(this.serviceProvider, view.Close);
             view.ShowDialog();
             if (view.DataContext is SettingsViewModel vm)
             {
                 this.SelectorVM.RefreshAllEntries();
             }
+        }
+
+        private T SetupView<T>()
+            where T : Window, new()
+        {
+            return new T()
+            {
+                Owner = Application.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
         }
     }
 }
