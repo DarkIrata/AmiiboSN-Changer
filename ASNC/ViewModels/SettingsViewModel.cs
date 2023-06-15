@@ -155,6 +155,23 @@ namespace ASNC.ViewModels
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
+                if (this.apiData == null)
+                {
+                    var msgBoxResult = MessageBox.Show(
+                        $"You are missing the required Amiibo Info Data.{Environment.NewLine}Would you like to download it?{Environment.NewLine}Press 'No' to abort.",
+                        "Download images",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if (msgBoxResult == MessageBoxResult.Yes)
+                    {
+                        this.ExecuteUpdateApiData();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
                 this.Working = true;
                 this.WorkingSubText = "Downloading images";
                 try
