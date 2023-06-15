@@ -119,7 +119,7 @@ namespace ASNC.ViewModels
                     baseTag.RandomizeUID();
                     var newFileName = $"{fileName}_asnc_{i}{targetFiletype}";
                     var path = Path.Combine(this.OutputPath!, newFileName);
-                    var encryptedTag = this.serviceProvider.LibAmiibo.EncryptTag(singleTag.AmiiboTag);
+                    var encryptedTag = this.serviceProvider.LibAmiibo.EncryptTag(baseTag);
 
                     if (path.EndsWith(FlipperNFCHelper.Filetype))
                     {
