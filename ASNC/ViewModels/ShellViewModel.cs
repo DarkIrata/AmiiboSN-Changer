@@ -38,7 +38,7 @@ namespace ASNC.ViewModels
 
             this.OpenSettingsCommand = new DelegateCommand(() => this.ExecuteOpenSettings());
             this.OpenAboutCommand = new DelegateCommand(() => this.ExecuteOpenAbout());
-            this.OpenBulkExportCommand = new DelegateCommand(() => this.ExecuteOpenBulkExport(), () => this.SelectorVM?.AmiiboTags.Count != 0);
+            this.OpenBulkExportCommand = new DelegateCommand(() => this.ExecuteOpenBulkExport(), () => this.SelectorVM?.AmiiboTags.Count != 0 && this.serviceProvider.LibAmiibo.IsAmiiboKeyProvided);
 
             this.AmiiboVM = new AmiiboViewModel(this.serviceProvider);
             this.SelectorVM = new AmiiboSelectorViewModel(this.serviceProvider, this.AmiiboVM.SetAmiibo, () => this.OpenBulkExportCommand.RaiseCanExecuteChanged());
