@@ -26,7 +26,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -38,8 +38,40 @@
                 FontSize="17"
                 FontWeight="SemiBold" />
 
-            <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-                <Button
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button
+                    Width="90"
+                    Height="40"
+                    Margin="4,0,5,0"
+                    Padding="8,0"
+                    HorizontalAlignment="Left"
+                    BorderThickness="1"
+                    Command="{Binding ClearTagsCommand}"
+                    Style="{DynamicResource ErrorButton}">
+
+                        <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                            <Path
+                            Width="18"
+                            Height="18"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{DynamicResource TrashCan}"
+                            Fill="{DynamicResource OnPrimaryBrush}"
+                            Stretch="Uniform" />
+
+                            <Label
+                            Padding="5,0,2,1"
+                            Content="Clear"
+                            FontSize="15"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource OnPrimaryBrush}" />
+                        </StackPanel>
+                    </Button>
+                        
+                    <Button
                     Width="120"
                     Height="40"
                     Margin="0,0"

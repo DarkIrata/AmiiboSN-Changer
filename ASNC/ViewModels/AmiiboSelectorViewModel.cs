@@ -50,6 +50,8 @@ namespace ASNC.ViewModels
 
         public ICommand LoadTagCommand { get; }
 
+        public DelegateCommand ClearTagsCommand { get; }
+
         public AmiiboSelectorViewModel(ServiceProvider serviceProvider, Action<AmiiboTagSelectableViewModel?> onSelectedAmiiboChanged, Action onListChanged)
         {
             this.serviceProvider = serviceProvider;
@@ -58,6 +60,7 @@ namespace ASNC.ViewModels
             this.onListChanged = onListChanged;
 
             this.LoadTagCommand = new DelegateCommand(() => this.ExecuteLoadTag());
+            this.ClearTagsCommand = new DelegateCommand(() => this.ExecuteClearTags(), () => (this.AmiiboTags?.Count ?? 0) > 0);
         }
 
         private void RemoveTag(AmiiboTagSelectableViewModel? tag)
@@ -67,6 +70,7 @@ namespace ASNC.ViewModels
                 this.AmiiboTags.Remove(tag);
                 this.SelectedItem = null;
                 this.onListChanged?.Invoke();
+                this.ClearTagsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -82,6 +86,22 @@ namespace ASNC.ViewModels
             if (dialog.ShowDialog() == true)
             {
                 await this.AddTags(dialog.FileNames);
+                this.ClearTagsCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private void ExecuteClearTags()
+        {
+            if (MessageBox.Show(
+                $"Remove all Amiibo Tags from list?",
+                "Remove from list",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question,
+                MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                this.AmiiboTags.Clear();
+                this.ClearTagsCommand.RaiseCanExecuteChanged();
+                this.onListChanged?.Invoke();
             }
         }
 
