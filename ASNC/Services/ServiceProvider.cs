@@ -21,7 +21,7 @@ namespace ASNC.Services
             this.ReinitializeLibAmiibo();
         }
 
-        private void ReinitializeLibAmiibo()
+        internal void ReinitializeLibAmiibo()
         {
             if (File.Exists(this.Config?.RetailKeyPath))
             {

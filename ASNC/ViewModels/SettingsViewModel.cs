@@ -131,11 +131,12 @@ namespace ASNC.ViewModels
 
         private void ExecuteSave()
         {
-            this.serviceProvider.Config.RetailKeyPath = this.keyFilePath;
+            this.serviceProvider.Config.RetailKeyPath = this.KeyFilePath;
             this.serviceProvider.Config.DownloadInfoDataOnStart = this.DownloadInfoDataOnStart;
             this.serviceProvider.Config.DownloadMissingImagesOnLoad = this.DownloadMissingImagesOnLoad;
 
             this.DialogResult = true;
+            this.serviceProvider.ReinitializeLibAmiibo();
             this.serviceProvider.Config.Save();
             this.close?.Invoke();
         }

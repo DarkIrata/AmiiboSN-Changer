@@ -71,6 +71,7 @@ namespace ASNC.ViewModels
             if (view.DataContext is SettingsViewModel vm)
             {
                 this.SelectorVM.RefreshAllEntries();
+                this.OpenBulkExportCommand.RaiseCanExecuteChanged();
             }
         }
 
