@@ -86,7 +86,6 @@ namespace ASNC.ViewModels
             if (dialog.ShowDialog() == true)
             {
                 await this.AddTags(dialog.FileNames);
-                this.ClearTagsCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -121,6 +120,7 @@ namespace ASNC.ViewModels
             }
 
             this.onListChanged?.Invoke();
+            this.ClearTagsCommand.RaiseCanExecuteChanged();
         }
 
         public async Task<AmiiboTagSelectableViewModel?> AddTag(string filePath)
