@@ -34,10 +34,10 @@
             x:Name="TitleLabel"
             Margin="0,-3,0,0"
             Padding="5,5,5,0"
-            IsHitTestVisible="False"
             VerticalAlignment="Top"
             Content="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}"
             FontSize="11"
+            IsHitTestVisible="False"
             RenderOptions.BitmapScalingMode="HighQuality" />
 
         <Border
