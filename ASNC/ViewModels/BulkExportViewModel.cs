@@ -59,6 +59,22 @@ namespace ASNC.ViewModels
             set => this.Set(ref this.selectedExportTargetType, value, nameof(this.SelectedExportTargetType));
         }
 
+        private bool useLeadingNumbers = true;
+
+        public bool UseLeadingNumbers
+        {
+            get => this.useLeadingNumbers;
+            set => this.Set(ref this.useLeadingNumbers, value, nameof(this.UseLeadingNumbers));
+        }
+
+        private bool openFolderWhenFinished;
+
+        public bool OpenFolderWhenFinished
+        {
+            get => this.openFolderWhenFinished;
+            set => this.Set(ref this.openFolderWhenFinished, value, nameof(this.OpenFolderWhenFinished));
+        }
+
         public ICommand AmountUpCommand { get; set; }
 
         public ICommand AmountDownCommand { get; set; }
@@ -77,20 +93,11 @@ namespace ASNC.ViewModels
             { FlipperNFCHelper.Filetype, ".nfc Flipper NFC" },
         };
 
-        public BulkExportViewModel(ServiceProvider serviceProvider, Action close, AmiiboTagSelectableViewModel[]? tags, int? lastSelectedExportTargetType = null)
+        public BulkExportViewModel(ServiceProvider serviceProvider, Action close, AmiiboTagSelectableViewModel[]? tags)
         {
             this.serviceProvider = serviceProvider;
             this.close = close;
             this.tags = tags;
-
-            if (lastSelectedExportTargetType != null)
-            {
-                this.SelectedExportTargetType = lastSelectedExportTargetType.Value;
-            }
-            else
-            {
-                this.SelectedExportTargetType = 0;
-            }
 
             this.AmountUpCommand = new DelegateCommand(() => this.AdjustAmount(1));
             this.AmountDownCommand = new DelegateCommand(() => this.AdjustAmount(-1));
@@ -114,10 +121,22 @@ namespace ASNC.ViewModels
             {
                 var fileName = Path.GetFileNameWithoutExtension(singleTag.FilePath);
                 var baseTag = this.serviceProvider.LibAmiibo.DecryptTag(singleTag.OriginalFileData);
-                for (int i = 0; i < this.Amount; i++)
+                var leadingZeroHelper = "D" + this.Amount.Length;
+                for (int i = 0; i < this.numericAmount; i++)
                 {
                     baseTag.RandomizeUID();
-                    var newFileName = $"{fileName}_asnc_{i}{targetFiletype}";
+
+                    var newFileName = $"{fileName}_asnc";
+                    if (this.UseLeadingNumbers)
+                    {
+                        newFileName = $"{i.ToString(leadingZeroHelper)}_{newFileName}";
+                    }
+                    else
+                    {
+                        newFileName = $"{newFileName}_{i}";
+                    }
+                    newFileName += targetFiletype;
+
                     var path = Path.Combine(this.OutputPath!, newFileName);
                     var encryptedTag = this.serviceProvider.LibAmiibo.EncryptTag(baseTag);
 
@@ -133,8 +152,11 @@ namespace ASNC.ViewModels
                 }
             }
 
-            var explorer = Process.Start("explorer.exe", this.OutputPath!);
-            explorer.WaitForExit(1000);
+            if (this.OpenFolderWhenFinished)
+            {
+                var explorer = Process.Start("explorer.exe", this.OutputPath!);
+                explorer.WaitForExit(1000);
+            }
 
             this.DialogResult = true;
             this.serviceProvider.Config.Save();
