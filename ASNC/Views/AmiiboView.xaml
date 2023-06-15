@@ -286,7 +286,7 @@
                                 <Setter Property="Fill" Value="{DynamicResource ErrorBrush}" />
                                 <Setter Property="ToolTip" Value="Amiibo Tag has no User Data and is not editable" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedAmiibo.AmiiboTag.HasUserData, FallbackValue=False}" Value="True">
+                                    <DataTrigger Binding="{Binding HasUserData, FallbackValue=False}" Value="True">
                                         <Setter Property="Data" Value="{DynamicResource UnlockedVarient}" />
                                         <Setter Property="Fill" Value="{DynamicResource SuccessBrush}" />
                                         <Setter Property="ToolTip" Value="Amiibo Tag User Data is editable" />
