@@ -317,7 +317,7 @@
                     Text="{Binding AmiiboNickname}" />
 
                 <controls:TitledTextBox
-                    Title="Registration Date"
+                    Title="Registration Date - Read only"
                     Margin="5,5,5,0"
                     IsReadOnly="True"
                     Text="{Binding RegistrationDate, Mode=OneWay}" />
