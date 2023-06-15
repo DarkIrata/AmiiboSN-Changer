@@ -290,6 +290,7 @@
     <Style TargetType="{x:Type Image}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="RenderOptions.EdgeMode" Value="Aliased" />
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
     </Style>
 
     <!--  Colors should be more swapable friendly  -->
