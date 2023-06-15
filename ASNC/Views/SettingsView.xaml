@@ -278,7 +278,7 @@
         </Grid>
 
 
-        <Grid Background="#90000000" Visibility="{Binding Working, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Background="#90000000" Visibility="{Binding Working, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 <Grid Width="70" Height="70">
                     <Grid.RenderTransform>
