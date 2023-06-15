@@ -158,5 +158,10 @@ namespace ASNC.ViewModels
                 }
             }
         }
+
+        internal void ResetDialog()
+        {
+            this.DialogResult = null;
+        }
     }
 }
