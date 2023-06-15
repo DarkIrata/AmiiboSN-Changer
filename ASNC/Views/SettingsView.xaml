@@ -211,75 +211,87 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel
+            <Grid
                 Grid.Row="3"
                 Margin="0,12,0,5"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Orientation="Horizontal">
+                VerticalAlignment="Bottom">
 
-                <Button
-                    Width="100"
-                    Margin="12,0"
-                    BorderThickness="1"
-                    Command="{Binding CancelCommand}"
-                    Style="{DynamicResource ErrorButton}">
-                    <StackPanel
+                <StackPanel Margin="3,0" Orientation="Horizontal">
+                    <Image
+                        Width="30"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Path
-                            Width="20"
-                            Height="20"
+                        Source="pack://application:,,,/Resources/Images/Github_Light.png" />
+                    <StackPanel Margin="3,1,0,0" VerticalAlignment="Center">
+                        <Label Padding="4,0" Content="Amiibo Data &amp; Images provided by" />
+                        <Label Padding="4,0" Content="https://github.com/N3evin/AmiiboAPI" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                    <Button
+                        Width="100"
+                        Margin="12,0"
+                        BorderThickness="1"
+                        Command="{Binding CancelCommand}"
+                        Style="{DynamicResource ErrorButton}">
+                        <StackPanel
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Data="{DynamicResource Close}"
-                            Fill="{DynamicResource OnPrimaryBrush}"
-                            Stretch="Uniform" />
+                            Orientation="Horizontal">
+                            <Path
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{DynamicResource Close}"
+                                Fill="{DynamicResource OnPrimaryBrush}"
+                                Stretch="Uniform" />
 
-                        <Label
-                            Padding="5,0,2,1"
-                            Content="Cancel"
-                            FontSize="15"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource OnPrimaryBrush}" />
-                    </StackPanel>
-                </Button>
+                            <Label
+                                Padding="5,0,2,1"
+                                Content="Cancel"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource OnPrimaryBrush}" />
+                        </StackPanel>
+                    </Button>
 
-                <Button
-                    Width="100"
-                    Margin="0,0"
-                    BorderThickness="1"
-                    Command="{Binding SaveCommand}"
-                    Style="{DynamicResource SuccessButton}">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <Path
-                            Width="20"
-                            Height="20"
+                    <Button
+                        Width="100"
+                        Margin="0,0"
+                        BorderThickness="1"
+                        Command="{Binding SaveCommand}"
+                        Style="{DynamicResource SuccessButton}">
+                        <StackPanel
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Data="{DynamicResource Save}"
-                            Fill="{DynamicResource OnPrimaryBrush}"
-                            Stretch="Uniform" />
+                            Orientation="Horizontal">
+                            <Path
+                                Width="20"
+                                Height="20"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{DynamicResource Save}"
+                                Fill="{DynamicResource OnPrimaryBrush}"
+                                Stretch="Uniform" />
 
-                        <Label
-                            Padding="5,0,2,1"
-                            Content="Save"
-                            FontSize="15"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource OnPrimaryBrush}" />
-                    </StackPanel>
-                </Button>
-
-            </StackPanel>
+                            <Label
+                                Padding="5,0,2,1"
+                                Content="Save"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource OnPrimaryBrush}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
 
 
         <Grid Background="#90000000" Visibility="{Binding Working, FallbackValue=Collapsed, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
                 <Grid Width="70" Height="70">
                     <Grid.RenderTransform>
                         <RotateTransform CenterX="35" CenterY="35" />
@@ -308,9 +320,18 @@
                         Stretch="Uniform" />
                 </Grid>
 
-                <Label Content="Working..." FontWeight="SemiBold" FontSize="19" HorizontalAlignment="Center" Margin="0,2"/>
+                <Label
+                    Margin="0,2"
+                    HorizontalAlignment="Center"
+                    Content="Working..."
+                    FontSize="19"
+                    FontWeight="SemiBold" />
 
-                <Label Content="{Binding WorkingSubText}" Background="#BC000000" HorizontalAlignment="Center" Padding="10"/>
+                <Label
+                    Padding="10"
+                    HorizontalAlignment="Center"
+                    Background="#BC000000"
+                    Content="{Binding WorkingSubText}" />
             </StackPanel>
         </Grid>
     </Grid>

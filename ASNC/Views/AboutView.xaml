@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
     Width="410"
-    Height="270"
+    Height="300"
     Background="{DynamicResource BackgroundBrush}"
     ResizeMode="NoResize"
     TextOptions.TextFormattingMode="Ideal"
@@ -68,6 +68,11 @@
                     <Label Padding="5,0" Content="Public Domain - StbSharp - StbSharpTeam" />
                 </Hyperlink>
             </TextBlock>
+            <TextBlock Margin="0,4,0,0">
+                <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/N3evin/AmiiboAPI">
+                    <Label Padding="5,0" Content="MIT - Amiibo API" />
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
 
         <Grid Grid.Column="1">
@@ -80,7 +85,7 @@
                 Source="pack://application:,,,/Resources/Images/Github_Light.png" />
 
             <Button
-                Width="100"
+                Width="90"
                 Margin="0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
@@ -92,7 +97,7 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
                     <Label
-                        Padding="5,0,2,1"
+                        Padding="2,0,2,1"
                         Content="Close"
                         FontSize="15"
                         FontWeight="SemiBold"
