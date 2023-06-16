@@ -93,9 +93,9 @@
                 </Button>
             </Grid>
 
-            <Label Padding="2" Content="Placeholder: &lt;file&gt;, &lt;num&gt;, &lt;retail&gt;, &lt;statue&gt;, &lt;statueid&gt;" />
+            <Label Padding="2" Content="Useable placeholder: &lt;file&gt;, &lt;num&gt;, &lt;retail&gt;, &lt;statue&gt;, &lt;statueid&gt;" />
             <StackPanel Orientation="Horizontal">
-                <Label Padding="2" Content="Result:" />
+                <Label Padding="2" Content="Example output:" />
                 <Label Padding="2" Foreground="{DynamicResource OnBackgroundBrush}" FontWeight="SemiBold" Content="{Binding ExampleFilename}" />
             </StackPanel>
 
