@@ -5,8 +5,8 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.2</AssemblyVersion>
-    <FileVersion>3.0.2</FileVersion>
+    <AssemblyVersion>3.0.3</AssemblyVersion>
+    <FileVersion>3.0.3</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ApplicationIcon>ASNC.ico</ApplicationIcon>
     <Authors>Wladislaw batt</Authors>
