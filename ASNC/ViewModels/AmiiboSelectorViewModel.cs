@@ -76,9 +76,10 @@ namespace ASNC.ViewModels
 
         private async void ExecuteLoadTag()
         {
+            var allUsableFileExtensions = $"*.bin;*{FlipperNFCHelper.Filetype}";
             var dialog = new OpenFileDialog
             {
-                Filter = $"Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.Filetype})|*{FlipperNFCHelper.Filetype}|All files (*.*)|*.*",
+                Filter = $"Amiibo Tag ({allUsableFileExtensions})|{allUsableFileExtensions}|Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.Filetype})|*{FlipperNFCHelper.Filetype}|All files (*.*)|*.*",
                 InitialDirectory = Assembly.GetExecutingAssembly().Location,
                 Multiselect = true
             };
