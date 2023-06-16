@@ -20,6 +20,7 @@
     <Geometry x:Key="Undo">M13.5,7A6.5,6.5 0 0,1 20,13.5A6.5,6.5 0 0,1 13.5,20H10V18H13.5C16,18 18,16 18,13.5C18,11 16,9 13.5,9H7.83L10.91,12.09L9.5,13.5L4,8L9.5,2.5L10.92,3.91L7.83,7H13.5M6,18H8V20H6V18Z</Geometry>
     <Geometry x:Key="Export">M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z</Geometry>
     <Geometry x:Key="Info">M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z</Geometry>
+    <Geometry x:Key="Question">M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z</Geometry>
     <Geometry x:Key="Download">M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z</Geometry>
 
     <!--  Styles  -->
@@ -347,11 +348,71 @@
     </Style>
 
 
+    <Style x:Key="BaseRoundButton" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource OnBackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource OptionMark.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource OptionMark.Static.Border}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="25">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource OptionMark.MouseOver.Background}" />
+                <Setter Property="BorderBrush" Value="{StaticResource OptionMark.MouseOver.Border}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="{StaticResource OptionMark.Disabled.Background}" />
+                <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Disabled.Border}" />
+                <Setter Property="Foreground" Value="{DynamicResource TextDisabledBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" Value="{StaticResource OptionMark.Pressed.Background}" />
+                <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Pressed.Border}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
     <Style BasedOn="{StaticResource BaseButton}" TargetType="{x:Type Button}" />
 
     <Style
         x:Key="PrimaryButton"
         BasedOn="{StaticResource BaseButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource OnPrimaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryVariantBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource PrimaryVariantBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" Value="{DynamicResource PrimaryDarkBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryVariantBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="PrimaryRoundButton"
+        BasedOn="{StaticResource BaseRoundButton}"
         TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{DynamicResource OnPrimaryBrush}" />
         <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />

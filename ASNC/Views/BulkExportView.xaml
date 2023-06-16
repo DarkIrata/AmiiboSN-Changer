@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:ASNC.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
-    Width="430"
-    Height="328"
+    Width="460"
+    Height="415"
     Background="{DynamicResource BackgroundBrush}"
     ResizeMode="NoResize"
     TextOptions.TextFormattingMode="Ideal"
@@ -64,16 +64,52 @@
         </Grid>
 
         <StackPanel Grid.Row="2" Margin="0,6,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <controls:TitledTextBox Title="Output Filename Format" Text="{Binding OutputFilenameFormat, UpdateSourceTrigger=PropertyChanged, Delay=200}" />
+
+                <Button
+                    Grid.Column="1"
+                    Width="45"
+                    Margin="3,0,0,0"
+                    BorderThickness="1"
+                    Command="{Binding ResetFilenameFormatCommand}"
+                    Style="{DynamicResource PrimaryButton}"
+                    ToolTip="Undo">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Path
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{DynamicResource Undo}"
+                            Fill="{DynamicResource TextBrush}"
+                            Stretch="Uniform" />
+                    </Grid>
+                </Button>
+            </Grid>
+
+            <Label Padding="2" Content="Placeholder: &lt;file&gt;, &lt;num&gt;, &lt;retail&gt;, &lt;statue&gt;, &lt;statueid&gt;" />
+            <StackPanel Orientation="Horizontal">
+                <Label Padding="2" Content="Result:" />
+                <Label Padding="2" Foreground="{DynamicResource OnBackgroundBrush}" FontWeight="SemiBold" Content="{Binding ExampleFilename}" />
+            </StackPanel>
+
             <CheckBox
-                Margin="0,0,0,4"
+                Margin="0,4,0,0"
+                VerticalContentAlignment="Center"
+                Content="Create Sub-Folder per Tag"
+                IsChecked="{Binding SubFolderPerTag}" />
+
+            <CheckBox
+                Margin="0,4,0,0"
                 VerticalContentAlignment="Center"
                 Content="Open Output Folder when finished"
                 IsChecked="{Binding OpenFolderWhenFinished}" />
-
-            <CheckBox
-                VerticalContentAlignment="Center"
-                Content="Used leading numbers instead of trailing numbers"
-                IsChecked="{Binding UseLeadingNumbers}" />
         </StackPanel>
 
         <Border
