@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,8 @@ namespace ASNC.ViewModels
         private readonly ImageQueueService imageQueueService;
         private readonly Action<AmiiboTagSelectableViewModel?> onSelectedAmiiboChanged;
         private readonly Action onListChanged;
+
+        private string? lastUsedAmiiboPath = null;
 
         public ObservableCollection<AmiiboTagSelectableViewModel> AmiiboTags { get; set; } = new ObservableCollection<AmiiboTagSelectableViewModel>();
 
@@ -77,15 +80,21 @@ namespace ASNC.ViewModels
         private async void ExecuteLoadTag()
         {
             var allUsableFileExtensions = $"*.bin;*{FlipperNFCHelper.Filetype}";
+            var startDir = string.IsNullOrEmpty(this.lastUsedAmiiboPath) ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : this.lastUsedAmiiboPath;
             var dialog = new OpenFileDialog
             {
                 Filter = $"Amiibo Tag ({allUsableFileExtensions})|{allUsableFileExtensions}|Amiibo Tag bin file (*.bin)|*.bin|Flipper NFC file (*{FlipperNFCHelper.Filetype})|*{FlipperNFCHelper.Filetype}|All files (*.*)|*.*",
-                InitialDirectory = Assembly.GetExecutingAssembly().Location,
+                InitialDirectory = startDir,
                 Multiselect = true
             };
 
             if (dialog.ShowDialog() == true)
             {
+                var firstFile = dialog.FileNames.FirstOrDefault();
+                if (firstFile != null)
+                {
+                    this.lastUsedAmiiboPath = Path.GetDirectoryName(firstFile);
+                }
                 await this.AddTags(dialog.FileNames);
             }
         }
