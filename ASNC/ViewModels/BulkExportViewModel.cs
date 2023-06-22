@@ -72,12 +72,20 @@ namespace ASNC.ViewModels
             set => this.Set(ref this.openFolderWhenFinished, value, nameof(this.OpenFolderWhenFinished));
         }
 
-        private bool subFolderPerTag;
+        private bool subfolderPerTag;
 
-        public bool SubFolderPerTag
+        public bool SubfolderPerTag
         {
-            get => this.subFolderPerTag;
-            set => this.Set(ref this.subFolderPerTag, value, nameof(this.SubFolderPerTag));
+            get => this.subfolderPerTag;
+            set => this.Set(ref this.subfolderPerTag, value, nameof(this.SubfolderPerTag));
+        }
+
+        private bool useCustomnameForFolder;
+
+        public bool UseCustomnameForFolder
+        {
+            get => this.useCustomnameForFolder;
+            set => this.Set(ref this.useCustomnameForFolder, value, nameof(this.UseCustomnameForFolder));
         }
 
         private string? outputFilenameFormat;
@@ -186,7 +194,7 @@ namespace ASNC.ViewModels
                 }
 
                 var leadingZeroHelper = "D" + this.Amount.Length;
-                var subFolderName = this.GetOutputSubFolderName(baseTag);
+                var subFolderName = this.GetOutputSubfolderName(filename, baseTag);
 
                 for (int i = 0; i < this.numericAmount; i++)
                 {
@@ -210,7 +218,7 @@ namespace ASNC.ViewModels
             tag!.RandomizeUID();
 
             var num = (i + 1).ToString(leadingZeroHelper);
-            var newFileName = this.GetFormatedFilename(filename, num, tag?.Amiibo?.RetailName, tag?.Amiibo?.StatueName, tag?.Amiibo?.StatueId);
+            var newFileName = this.GetFormatedFilename(filename, num, tag);
             newFileName += targetFiletype;
 
             var path = Path.Combine(this.OutputPath!, subFolderName ?? string.Empty, newFileName);
@@ -227,19 +235,24 @@ namespace ASNC.ViewModels
             }
         }
 
-        private string? GetOutputSubFolderName(AmiiboTag tag)
+        private string? GetOutputSubfolderName(string filename, AmiiboTag tag)
         {
-            if (this.SubFolderPerTag)
+            if (this.SubfolderPerTag)
             {
-                var subFolderName = tag?.Amiibo?.RetailName;
-                if (!string.IsNullOrEmpty(subFolderName))
+                var subfolderName = tag?.Amiibo?.RetailName;
+                if (this.UseCustomnameForFolder)
                 {
-                    var subFolderPath = Path.Combine(this.OutputPath!, subFolderName);
+                    subfolderName = this.GetFormatedFilename(filename, string.Empty, tag);
+                }
+
+                if (!string.IsNullOrEmpty(subfolderName))
+                {
+                    var subFolderPath = Path.Combine(this.OutputPath!, subfolderName);
                     var subFolderSuffix = string.Empty;
                     if (Directory.Exists(subFolderPath))
                     {
                         var dirs = Directory.GetDirectories(this.OutputPath!);
-                        var dirCount = dirs.Count(d => Path.GetFileName(d)!.StartsWith(subFolderName));
+                        var dirCount = dirs.Count(d => Path.GetFileName(d)!.StartsWith(subfolderName));
                         if (dirCount > 0)
                         {
                             subFolderSuffix = $" {dirCount}";
@@ -247,7 +260,7 @@ namespace ASNC.ViewModels
                     }
 
                     Directory.CreateDirectory(subFolderPath + subFolderSuffix);
-                    return subFolderName + subFolderSuffix;
+                    return subfolderName + subFolderSuffix;
                 }
             }
 
@@ -272,11 +285,14 @@ namespace ASNC.ViewModels
             }
         }
 
+        private string GetFormatedFilename(string filename, string num, AmiiboTag? tag)
+        => this.GetFormatedFilename(filename, num, tag?.Amiibo?.RetailName, tag?.Amiibo?.StatueName, tag?.Amiibo?.StatueId);
+
         private string GetFormatedFilename(string filename, string num, string? retailName = null, string? statueName = null, string? statueId = null)
         {
             var baseName = this.OutputFilenameFormat ?? string.Empty;
             var replaced = baseName.Replace("<file>", filename)
-                                   .Replace("<num>", num.ToString())
+                                   .Replace("<num>", num)
                                    .Replace("<retail>", retailName ?? string.Empty)
                                    .Replace("<statue>", statueName ?? string.Empty)
                                    .Replace("<statueid>", statueId ?? string.Empty);

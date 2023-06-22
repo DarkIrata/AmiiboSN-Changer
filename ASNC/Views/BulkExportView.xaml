@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:ASNC.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="{Binding Title}"
-    Width="460"
+    Width="475"
     Height="415"
     Background="{DynamicResource BackgroundBrush}"
     ResizeMode="NoResize"
@@ -96,14 +96,34 @@
             <Label Padding="2" Content="Useable placeholder: &lt;file&gt;, &lt;num&gt;, &lt;retail&gt;, &lt;statue&gt;, &lt;statueid&gt;" />
             <StackPanel Orientation="Horizontal">
                 <Label Padding="2" Content="Example output:" />
-                <Label Padding="2" Foreground="{DynamicResource OnBackgroundBrush}" FontWeight="SemiBold" Content="{Binding ExampleFilename}" />
+                <Label
+                    Padding="2"
+                    Content="{Binding ExampleFilename}"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource OnBackgroundBrush}" />
             </StackPanel>
 
-            <CheckBox
-                Margin="0,4,0,0"
-                VerticalContentAlignment="Center"
-                Content="Create Sub-Folder per Tag"
-                IsChecked="{Binding SubFolderPerTag}" />
+            <Grid Margin="0,4,0,0" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox
+                    VerticalContentAlignment="Center"
+                    Content="Create subfolder per Tag"
+                    IsChecked="{Binding SubfolderPerTag}" />
+
+                <CheckBox
+                    Grid.Column="2"
+                    Margin="0,0,3,0"
+                    VerticalContentAlignment="Center"
+                    Content="Use custom name for subfolders"
+                    Visibility="{Binding SubfolderPerTag, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    IsChecked="{Binding UseCustomnameForFolder}" />
+
+            </Grid>
 
             <CheckBox
                 Margin="0,4,0,0"
