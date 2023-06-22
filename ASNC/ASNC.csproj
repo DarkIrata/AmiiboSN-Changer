@@ -5,15 +5,15 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.3</AssemblyVersion>
-    <FileVersion>3.0.3</FileVersion>
+    <AssemblyVersion>3.0.4</AssemblyVersion>
+    <FileVersion>3.0.4</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ApplicationIcon>ASNC.ico</ApplicationIcon>
     <Authors>Wladislaw batt</Authors>
     <Company>IrataProjects</Company>
     <Copyright>IrataProjects 2023</Copyright>
-    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-Changer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-Changer</RepositoryUrl>
     <AssemblyName>Amiibo SN Changer</AssemblyName>
     <Version>$(AssemblyVersion)</Version>
   </PropertyGroup>
