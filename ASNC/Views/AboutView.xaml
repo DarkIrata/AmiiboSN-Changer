@@ -70,7 +70,7 @@
             </TextBlock>
             <TextBlock Margin="0,4,0,0">
                 <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/N3evin/AmiiboAPI">
-                    <Label Padding="5,0" Content="MIT - Amiibo API" />
+                    <Label Padding="5,0" Content="MIT - Amiibo API - N3evin" />
                 </Hyperlink>
             </TextBlock>
         </StackPanel>

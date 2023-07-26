@@ -85,7 +85,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <StackPanel>
