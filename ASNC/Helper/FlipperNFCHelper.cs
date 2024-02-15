@@ -7,7 +7,8 @@ namespace ASNC.Helper
 {
     public static class FlipperNFCHelper
     {
-        private const int TotalPages = 135;
+        private const int TotalPages = 135; // 0 - 134
+        private const int PwdPage = 133;
         private const int PageDataLength = 0x04;
         private const int NfcLength = 0x21C;
 
@@ -25,14 +26,15 @@ namespace ASNC.Helper
                 encryptedBin[0],
                 encryptedBin[1],
                 encryptedBin[2],
-                encryptedBin[4],
+                encryptedBin[4], // Yes, 4 not 3. Thats why we dont slice it.
                 encryptedBin[5],
                 encryptedBin[6],
                 encryptedBin[7],
             };
 
-            var uid = Regex.Replace(Convert.ToHexString(uidBytes), ".{2}", "$0 ").Trim();
+            var uid = GetBytesAsStringFormated(uidBytes);
             var zeroedSignature = string.Concat(Enumerable.Repeat("00 ", 32)).Trim();
+            var pwdBytes = CalculatePwd(uidBytes);
 
             var sb = new StringBuilder();
             sb.AppendLine("Filetype: Flipper NFC device");
@@ -54,12 +56,27 @@ namespace ASNC.Helper
             for (int i = 0; i < TotalPages; i++)
             {
                 var pageBytes = encryptedBin.Slice(i * PageDataLength, PageDataLength); // 4 Bytes per page
-                var pageData = Regex.Replace(Convert.ToHexString(pageBytes), ".{2}", "$0 ").Trim();
+                if (i == PwdPage)
+                {
+                    pageBytes = pwdBytes;
+                }
+                var pageData = GetBytesAsStringFormated(pageBytes);
                 sb.AppendLine($"Page {i}: {pageData}"); // Common value
             }
 
             return sb.ToString();
         }
+
+        private static string GetBytesAsStringFormated(ReadOnlySpan<byte> bytes)
+            => Regex.Replace(Convert.ToHexString(bytes), ".{2}", "$0 ").Trim();
+
+        // https://nfc.toys/interop-ami.html
+        // https://github.com/turbospok/Flipper-NTAG215-password-converter/blob/3469a58909b0d306c3dc75990c09a4c0d2bb1ff9/ntag215converter.py#L118
+        private static byte[] CalculatePwd(byte[] uidBytes)
+            => new byte[] { (byte)(uidBytes[1] ^ uidBytes[3] ^ 0xAA),
+                            (byte)(uidBytes[2] ^ uidBytes[4] ^ 0x55),
+                            (byte)(uidBytes[3] ^ uidBytes[5] ^ 0xAA),
+                            (byte)(uidBytes[4] ^ uidBytes[6] ^ 0x55)};
 
         public static byte[] ToBin(string nfc) // This function is build so even when the file is badly formatted, it should transformable
         {
