@@ -130,7 +130,7 @@ namespace ASNC.ViewModels
             }, () => this.IsDecrypted);
         }
 
-        private void ExecuteReloadTag()
+        internal void ExecuteReloadTag()
         {
             if (this.SelectedAmiibo?.OriginalFileData != null)
             {
