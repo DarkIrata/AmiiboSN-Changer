@@ -29,7 +29,7 @@
                 Content="{Binding InnerTitle}"
                 FontSize="17"
                 FontWeight="SemiBold" />
-            <Label Padding="5,0,0,2" Content="Copyright 2023 - DarkIrata - GPL-3.0" />
+            <Label Padding="5,0,0,2" Content="Copyright 2024 - DarkIrata - GPL-3.0" />
 
             <TextBlock>
                 <Hyperlink Command="{Binding OpenUrlCommand}" CommandParameter="https://github.com/DarkIrata/AmiiboSN-Changer">
