@@ -9,6 +9,7 @@ namespace ASNC.Helper
     {
         private const int TotalPages = 135; // 0 - 134
         private const int PwdPage = 133;
+        private const int PackRfuiPage = 134;
         private const int PageDataLength = 0x04;
         private const int NfcLength = 0x21C;
 
@@ -59,6 +60,10 @@ namespace ASNC.Helper
                 if (i == PwdPage)
                 {
                     pageBytes = pwdBytes;
+                }
+                else if (i == PackRfuiPage)
+                {
+                    pageBytes = [0x80, 0x80, 0x00, 0x00];
                 }
                 var pageData = GetBytesAsStringFormated(pageBytes);
                 sb.AppendLine($"Page {i}: {pageData}"); // Common value
