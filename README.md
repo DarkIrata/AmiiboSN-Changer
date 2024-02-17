@@ -17,7 +17,7 @@ Required is a key_retail.bin (MD5 45FD53569F5765EEF9C337BD5172F937) file.
 The key_retail.bin is a binary merge of "unfixed-info.bin" and "locked-secret.bin"
 On the first run, you will be asked for a file path.
 
-If you don't use the Self-Contained Version, you need to have .NET 6 installed.
+If you don't use the Self-Contained Version, you need to have .NET 8 installed.
 The first run requires an active internet connection to download Amiibo information data and Images.
 
 ## Usage - GUI
