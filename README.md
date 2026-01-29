@@ -10,7 +10,7 @@ Tested with N2Elite and TagMo Backups
 - Download newest Amiibo Infos and Images from AmiiboAPI Repo | https://github.com/N3evin/AmiiboAPI
 - Edit Nickname, and Mii Owner / Author (Only if you know what you are doing)
 - Easy to use!
-- Dark Mode 🤡
+- Dark Mode
 
 ## Installation
 Required is a key_retail.bin (MD5 45FD53569F5765EEF9C337BD5172F937) file.
@@ -36,7 +36,10 @@ dotnet "D:\AmiiboSN-Changer\ASNC.dll" -a "D:\AmiiboSN-Changer\Amiibos\8BitMario.
 
 ## Credits
 AnalogMan - Simpler Python Version and the idea for a wrapper Tool
+
 Falco20019 - Awesome amiibo library (libamiibo)
+
 0xz00n - Inspired the NFC generating code
+
 pictogrammers - Icons
 
