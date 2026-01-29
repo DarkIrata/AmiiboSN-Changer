@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>3.0.5.1</AssemblyVersion>
-    <FileVersion>3.0.5.1</FileVersion>
+    <AssemblyVersion>3.0.6.0</AssemblyVersion>
+    <FileVersion>3.0.6.0</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ApplicationIcon>ASNC.ico</ApplicationIcon>
     <Authors>Wladislaw batt</Authors>
     <Company>IrataProjects</Company>
-    <Copyright>IrataProjects 2024</Copyright>
+    <Copyright>IrataProjects 2026</Copyright>
     <PackageProjectUrl>https://github.com/DarkIrata/AmiiboSN-Changer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DarkIrata/AmiiboSN-Changer</RepositoryUrl>
     <AssemblyName>Amiibo SN Changer</AssemblyName>
@@ -51,10 +51,10 @@
 
   <ItemGroup>
     <Reference Include="IPUP.MVVM">
-      <HintPath>..\External\IPUP.MVVM\net6.0\IPUP.MVVM.dll</HintPath>
+      <HintPath>..\External\IPUP.MVVM\net10.0\IPUP.MVVM.dll</HintPath>
     </Reference>
     <Reference Include="LibAmiibo">
-      <HintPath>..\External\LibAmiibo\net6.0\LibAmiibo.dll</HintPath>
+      <HintPath>..\External\LibAmiibo\net10.0\LibAmiibo.dll</HintPath>
     </Reference>
   </ItemGroup>
 
