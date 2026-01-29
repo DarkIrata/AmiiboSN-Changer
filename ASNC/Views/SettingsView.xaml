@@ -224,7 +224,7 @@
                         Source="pack://application:,,,/Resources/Images/Github_Light.png" />
                     <StackPanel Margin="3,1,0,0" VerticalAlignment="Center">
                         <Label Padding="4,0" Content="Amiibo Data &amp; Images provided by" />
-                        <Label Padding="4,0" Content="https://github.com/N3evin/AmiiboAPI" />
+                        <Label Padding="4,0" Content="https://github.com/8bitDream/AmiiboAPI" />
                     </StackPanel>
                 </StackPanel>
 
